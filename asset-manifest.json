@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/MERN-crud/static/css/main.5296ecf3.css",
+    "main.js": "/MERN-crud/static/js/main.245955ee.js",
+    "index.html": "/MERN-crud/index.html",
+    "main.5296ecf3.css.map": "/MERN-crud/static/css/main.5296ecf3.css.map",
+    "main.245955ee.js.map": "/MERN-crud/static/js/main.245955ee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5296ecf3.css",
+    "static/js/main.245955ee.js"
+  ]
+}
