@@ -15,3 +15,5 @@ More information about this API can be read here --> <a href='https://github.com
 - Search Bar
 - IA focused navigation
 - Website Hosting
+
+You can read more in <a href='https://github.com/AuraSp/MERN-crud/wiki/1.Home'>Wiki</a>
