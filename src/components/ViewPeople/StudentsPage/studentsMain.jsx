@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { BiSearchAlt } from "react-icons/bi";
+import { HiOutlineSpeakerphone } from "react-icons/hi";
 import {
     Link,
     useSearchParams
@@ -20,7 +21,7 @@ function StudentsMain() {
 
     const getUsers = async () => {
         setLoading(true);
-        const response = await fetch(`${process.env.REACT_APP_API_PROXY_URI}/students`);
+        const response = await fetch(`https://api-for-mern-app.onrender.com/api/v2/students`);
         const users = await response.json();
         console.info(users);
         setUsers(users.data.students);
@@ -113,6 +114,10 @@ function StudentsMain() {
                         <label><BiSearchAlt />Search:&nbsp;</label>
                         <input type="text" value={searchTerm} onChange={handleSearch} className='text-dark' placeholder='Search students...' />
                     </div>
+                </div>
+                <div className='updating rounded fw-bold mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
+                    <HiOutlineSpeakerphone className='text-black mx-4 p-0' />
+                    <span className='text-black'>This page is being updated at the moment!</span>
                 </div>
             </div>
             <table className='table mt-3'>

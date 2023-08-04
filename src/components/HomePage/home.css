@@ -1,34 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&family=Dekko&display=swap');
 
-*{
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.navigation, .link {
-    background-color: #171717;
-    height: 10vh;
-    font-family: 'Patrick Hand';
+.navigation {
+    height: 20vh;
+    font-family: Dekko;
 }
 
-.navItem{
+.navItem {
+    border: 1px solid #fff;
     border-radius: 25px;
-    width: 11em;
-    font-size: 1.1em;
-    background-color: #8f6c6c;
+    width: 10em;
+    font-size: 1.2em;
+    background-color: #2f48588e;
     text-decoration: none;
     color: #fff;
     transition: 300ms linear;
 }
 
 .navItem:hover {
-    color: #5f0d0d;
-    text-decoration: underline;
+    color: #2f4858;
+    background-color: #ffffff8e;
+    border-color: #2f48588e;
 }
 
-.crud{
-    height: 80vh;
-    font-size: 5em;
-    font-family: 'Kalam';
+.app-title {
+    height: 60vh;
+    font-size: 4.5em;
+    font-family: Dekko;
+    color: #fff;
+    animation: fade 800ms linear;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .2;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
