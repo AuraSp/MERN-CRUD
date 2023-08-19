@@ -16,7 +16,7 @@ More information about this API can be read here --> <a href='https://github.com
 - IA focused navigation
 - Website Hosting
 
-<img src='https://imgur.com/lHkjBeb.png' type="image/png" width='500' height='auto' />
+<img src='https://imgur.com/OWOxBqT.png' type="image/png" width='500' height='auto' />
 
 You can read more in <a href='https://github.com/AuraSp/MERN-crud/wiki/1.Home'>Wiki</a>
 
