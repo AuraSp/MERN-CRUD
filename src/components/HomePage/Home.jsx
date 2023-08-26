@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
     Link
 } from "react-router-dom";
@@ -6,20 +6,21 @@ import {
 import './home.css';
 
 function Home() {
-
     return (
-        <Fragment className='row'>
-            <div className='col-lg-12 col-md-12 col-sm-12 navigation d-flex flex-row justify-content-center text-center align-items-center pt-6'>
-                <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Archive</Link>
-                <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Archive</Link>
+        <div className="row h-100 w-100">
+            <div className='col-12 d-flex align-items-center justify-content-center top-block'>
+                <Link to="/students" className='top-link text-white py-1 px-3 fw-bold'>Go to archive</Link>
             </div>
-            <div className='col-lg-12 col-md-12 col-sm-12'>
-                <span className='d-flex justify-content-center align-items-center fw-bold fs-italic app-title'>Digital School Archive</span>
+            <div className='col-12 text-center d-flex align-items-center justify-content-center mid-block'>
+                <h1 className=" text-white fw-bold mid-title">Digital School Archive</h1>
             </div>
-            <div className='col-lg-12 col-md-12 col-sm-12 navigation d-flex flex-row justify-content-center text-center align-items-center pb-5'>
-                <a href='https://cloud.mongodb.com/v2' className='navItem fw-bold p-2'>Go to MongoDB</a>
+            <div className='col-12 d-flex align-items-center justify-content-center bottom-block'>
+                <button type='button'
+                    onClick={() => window.open('https://www.mongodb.com/', '_blank')}
+                    className="bottom-link text-white py-1 px-3 fw-bold">Go to MongoDB
+                </button>
             </div>
-        </Fragment>
+        </div>
     )
 }
 

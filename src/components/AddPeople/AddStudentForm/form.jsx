@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Swal from 'sweetalert2';
 
-import '../form.css';
 
 function Form() {
 
@@ -13,8 +12,8 @@ function Form() {
     const [surname, setSurname] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [town, setTown] = useState('');
-    const [program, setProgram] = useState('');
-    const [group, setGroup] = useState('');
+    const [subject, setSubject] = useState('');
+    const [subjectGroup, setsubjectGroup] = useState('');
 
     const userSchema = yup.object().shape({
         name: yup
@@ -33,7 +32,7 @@ function Form() {
         birthdate: yup
             .date()
             .nullable()
-            .min(new Date(1990, 1, 1), 'Cannot use past date')
+            .min(new Date(1950, 1, 1), 'Cannot use past date')
             .max(new Date(), "Cannot use future date")
             .typeError('Date birth must be entered')
             .required(),
@@ -43,12 +42,12 @@ function Form() {
             .matches(/^[a-zA-ZĄąČčĘęĖėĮįŠšŲųŪūŽž\s]+$/, "Only letters are allowed for this field and no blank")
             .strict()
             .required(),
-        program: yup
+        subject: yup
             .string()
             .nullable(false)
             .strict()
             .required('Must be chosen'),
-        group: yup
+        subjectGroup: yup
             .string()
             .nullable(false)
             .strict()
@@ -65,7 +64,7 @@ function Form() {
     });
 
     const onSubmit = () => {
-        fetch(`${process.env.REACT_APP_API_PROXY_URI}students`, {
+        fetch(`${process.env.REACT_APP_API_PROXY_URI}teachers`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -73,8 +72,8 @@ function Form() {
                 surname: surname,
                 birthdate: birthdate,
                 town: town,
-                program: program,
-                group: group,
+                subject: subject,
+                subjectGroup: subjectGroup,
             })
         })
             .then(response => response.json())
@@ -95,8 +94,8 @@ function Form() {
             setSurname(),
             setBirthdate(),
             setTown(),
-            setProgram(),
-            setGroup()
+            setSubject(),
+            setsubjectGroup()
         );
     };
 
@@ -107,13 +106,13 @@ function Form() {
                     <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
                     <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
                     <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
-                    <Link to="/form" className='navItem fw-bold mx-1 p-2'>Register student</Link>
+                    <Link to="/tform" className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
                 </div>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className='form d-flex flex-column justify-content-center m-auto p-2 w-25'>
 
-                <h3 className='text-center my-4 fw-bold'>Student registration</h3>
+                <h3 className='text-center my-4 fw-bold'>Teacher registration</h3>
 
                 <p className={errors.name ? 'text-danger text-center ' : ''}><input
                     {...register('name')}
@@ -143,33 +142,33 @@ function Form() {
                     className='border border-2 m-1 w-100'
                 />
                     {errors.town?.message}</p>
-                <p className={errors.program ? 'text-danger text-center ' : ''}>
+                <p className={errors.subject ? 'text-danger text-center ' : ''}>
                     <select
-                        {...register('program')}
-                        onChange={(e) => setProgram(e.target.value)}
+                        {...register('subject')}
+                        onChange={(e) => setSubject(e.target.value)}
                         defaultValue=''
                         className='border border-2 bg-transparent m-1 w-100'
                     >
-                        <option value='' disabled>---Choose your program--</option>
+                        <option value='' disabled>---Choose your subject--</option>
                         <option value='Javascript'>JavaScript</option>
                         <option value='Java'>Java</option>
                         <option value='PHP'>PHP</option>
                         <option value='Tester'>Programinės įrangos testuotojas</option>
                     </select>
-                    {errors.program?.message}</p>
-                <p className={errors.group ? 'text-danger text-center ' : ''}>
+                    {errors.subject?.message}</p>
+                <p className={errors.subjectGroup ? 'text-danger text-center ' : ''}>
                     <select
-                        {...register('group')}
-                        onChange={(e) => setGroup(e.target.value)}
+                        {...register('subjectGroup')}
+                        onChange={(e) => setsubjectGroup(e.target.value)}
                         defaultValue=''
                         className='border border-2 bg-transparent m-1 w-100'
                     >
-                        <option value='' disabled>---Choose your group--</option>
+                        <option value='' disabled>---Choose your subject group--</option>
                         <option value='1'>1 grupė</option>
                         <option value='2'>2 grupė</option>
                         <option value='3'>3 grupė</option>
                     </select>
-                    {errors.group?.message}</p>
+                    {errors.subjectGroup?.message}</p>
 
                 <div className='text-center'>
                     <button type="submit" className='btn btn-secondary text-warning w-75 m-1 submit'>Create</button>

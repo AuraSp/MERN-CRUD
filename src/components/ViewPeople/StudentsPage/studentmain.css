@@ -1,12 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&display=swap');
 
-* {
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.loader {
+
+.block-container {
+    width: 80%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .logo-name {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-grow: 1;
+  }
+  
+  .logo-name img {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Maintain aspect ratio */
+    margin-right: 10px;
+  }
+  
+  .logo-name span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .link-image img {
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Maintain aspect ratio */
+  }
+  
+  .link-image a {
+    display: block;
+  }
+  
+  /* Optional: Add more styling as needed */
+  
+
+
+/* .loader {
     font-size: 3em;
     text-align: center;
 }
@@ -26,7 +67,7 @@
     transform: translateX(20vw);
 }
 
-.search label svg {
+.search label svg{
     position: relative;
     bottom: 0.1em;
 
@@ -41,18 +82,64 @@
     text-align: center;
     outline: none;
 }
-
 .search input:focus {
     outline: none;
     border: 3px solid #993f3f;
 }
 
-thead {
+thead{
     font-family: 'Patrick Hand';
+} */
+
+
+/* .table-block {
+    height: 100%;
+    width: 100%;
 }
 
-.updating {
-    font-size: 1.5em;
-    color: 000;
-    text-transform: uppercase;
+.table-block>div:first-of-type {
+    border: 2px solid yellow;
+    width: calc(100% - 20%);
+    text-align: end;
 }
+
+
+.table-block .table {
+    width: 80%;
+    height: calc(100% - 50%);
+    display: block;
+    overflow-y: scroll;
+}
+
+.tools-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    background-color: rgb(224, 224, 224);
+    position: absolute;
+    text-align: left;
+    top: 4.2em;
+    right: 3.5em;
+    border-radius: 5px;
+    padding: 8px 0.8em;
+    min-width: 12em;
+    min-height: 8em;
+    z-index: 1;
+    font-size: 0.9em;
+}
+
+.tools-content button {
+    width: auto;
+    height: auto;
+}
+
+.tools-content button span {
+    font-size: 0.8em;
+}
+.cardicons svg {
+    border-radius: 50%;
+} */

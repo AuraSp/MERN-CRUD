@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&family=Dekko&display=swap');
+
+:root {
+  --primary-color: #211f2c;
+  --secondary-color: #3C3B4B;
+  --accent-color: #FFF;
+  --active-action-color: #DE3434;
+
+  --language-colors: {
+    javascript: {
+      primary: #FFFED6,
+        secondary: #F1C868
+    },
+    java: {
+      primary: #DDEDDC,
+        secondary: #2FA331
+    },
+    php: {
+      primary: #D1E8F6,
+        secondary: #12AAF3
+    },
+    python: {
+      primary: #3C3B4B,
+        secondary: #111111
+    },
+    tester: {
+      primary: #E0A7A7,
+        secondary: #B04949
+    }
+  };
+
+  --font-family: Dekko
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  height: 100vh;
+
+  background-image: url(../../public/archive-bg.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+
+  z-index: -1;
+  opacity: .6;
+  background-image: linear-gradient(to right bottom, #000, #1c0d0d, #2c150f, #3a1f0c, #422c059b, #523f059b, #5f54019b, #686b009b, #868d0086, #a3b20086, #c2d8004f, #ddff004f);
+}
+
+#root {
+  height: 100%;
+}
