@@ -7,24 +7,30 @@
     height: 50%;
 }
 
-.top-link,
+.mid-title{
+    word-spacing: 5px;
+    letter-spacing: 5px;
+    font-size: 2.5rem;
+}
+
 .bottom-link {
-    border-radius: 20px;
     background-color: var(--primary-color);
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-size: 22px;
-    cursor: pointer;
     border: 1px solid var(--accent-color);
+    border-radius: 20px;
+    
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+
+    cursor: pointer;
     transition: 500ms linear;
 }
 
-.top-link:hover,
 .bottom-link:hover {
     border-color: var(--secondary-color);
 }
 
 /* Repeating styles */
-.top-link, .bottom-link, .mid-title{
+.bottom-link,
+.mid-title {
     font-family: var(--font-family);
 }

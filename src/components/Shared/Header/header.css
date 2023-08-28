@@ -1,0 +1,138 @@
+/* small screens */
+.screen-sm {
+    position: relative;
+}
+
+.screen-sm::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+    backdrop-filter: blur(10px);
+}
+
+.nav-btn {
+    position: relative;
+
+    z-index: 1;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.btn--open {
+    position: relative;
+}
+
+.btn--open::before {
+    content: "";
+
+    display: block;
+
+    width: 30px;
+    height: 2px;
+    margin-bottom: 5px;
+
+    background-color: #fff;
+
+    transition: transform 0.3s ease;
+}
+
+.btn--open::after {
+    content: "";
+
+    display: block;
+
+    width: 20px;
+    height: 2px;
+
+    background-color: #fff;
+
+    transition: transform 0.3s ease;
+}
+
+.btn--close {
+    content: '';
+
+    position: absolute;
+    top: -1%;
+    right: 0;
+
+    font-size: 3rem;
+
+    transition: transform 0.3s;
+}
+
+.nav-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-block a {
+    position: relative;
+
+    font-family: var(--font-family);
+    letter-spacing: 5px;
+}
+
+.nav-block a::after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: var(--primary-color);
+
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s;
+}
+
+.nav-block a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.responsive-nav {
+    display: flex;
+}
+
+/* larger / medium screens */
+.top-link {
+    background-color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 20px;
+
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+
+    cursor: pointer;
+    transition: 500ms linear;
+}
+
+.top-link:hover {
+    border-color: var(--secondary-color);
+}
+
+/* Repeating styles */
+.top-link {
+    font-family: var(--font-family);
+}

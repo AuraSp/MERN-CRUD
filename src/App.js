@@ -15,7 +15,7 @@
  function App() {
 
    return (
-     <div className='container-fluid h-100'>
+     <div className='container-fluid h-100 p-0 m-0'>
          <Routes>
            <Route path="/" element={<Home />} />
            <Route path="/students" element={<StudentsMain />} />

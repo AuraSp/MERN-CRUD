@@ -1,25 +1,38 @@
-import React from 'react';
-import {
-    Link
-} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+
+import HeaderSM from '../Shared/Header/Header-sm';
+import HeaderLGMG from '../Shared/Header/Header-lg-md';
 
 import './home.css';
 
 function Home() {
+
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <div className="row h-100 w-100">
-            <div className='col-12 d-flex align-items-center justify-content-center top-block'>
-                <Link to="/students" className='top-link text-white py-1 px-3 fw-bold'>Go to archive</Link>
+            {isSmallScreen ? <HeaderSM /> : <HeaderLGMG />}
+            <div className={`col-12 d-flex justify-content-center align-items-${isSmallScreen ? 'start' : 'center'} pt-${isSmallScreen ? '5' : '0'} mid-block`}>
+                <h1 className="text-white fw-bold mid-title">Digital Archive</h1>
             </div>
-            <div className='col-12 text-center d-flex align-items-center justify-content-center mid-block'>
-                <h1 className=" text-white fw-bold mid-title">Digital School Archive</h1>
-            </div>
-            <div className='col-12 d-flex align-items-center justify-content-center bottom-block'>
-                <button type='button'
-                    onClick={() => window.open('https://www.mongodb.com/', '_blank')}
-                    className="bottom-link text-white py-1 px-3 fw-bold">Go to MongoDB
-                </button>
-            </div>
+            {!isSmallScreen && (
+                <div className='col-12 d-flex justify-content-center align-items-center bottom-block'>
+                    <button type='button'
+                        onClick={() => window.open('https://www.mongodb.com/', '_blank')}
+                        className="py-1 px-3 text-white fw-bold bottom-link ">Go to MongoDB
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
