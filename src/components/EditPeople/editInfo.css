@@ -1,0 +1,47 @@
+.btn {
+    cursor: pointer;
+    transition: 500ms linear;
+    width: 3.6em;
+    height: 2.8em;
+    margin: 0 0 0 0.2em;
+}
+.btn:hover{
+    transform: scale(1.2, 1.2);
+    -webkit-box-shadow: 0px 0px 20px rgb(197, 144, 8);
+    -moz-box-shadow: 0px 0px 20px rgb(197, 144, 8);
+    box-shadow: 0px 0px 20px rgb(197, 144, 8);
+}
+
+svg {
+    transition: 600ms linear;
+    font-size: 1.5em;
+}
+
+
+.cancel{
+    font-size: 1em;
+    font-weight: bold;
+    transition: 200ms linear;
+    color: #e6a502;
+}
+
+.check{
+    font-size: 1em;
+    font-weight: bold;
+    transition: 200ms linear;
+    color: #e6a502;
+}
+
+#edit-row{
+    border: 1px solid red;
+}
+
+#edit-row input{
+    border: 0;
+    border-bottom: 1px solid var(--primary-color);
+    text-align: center;
+    color: #d49801;
+    border-radius: 2px;
+    padding: .5em;
+    font-weight: bold;
+}

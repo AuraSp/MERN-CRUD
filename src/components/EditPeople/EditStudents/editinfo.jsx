@@ -70,7 +70,7 @@
 //                 {errors.subjectGroup?.message}</p>
 
 //             <div className='text-center'>
-//                 <button type="submit" className='btn btn-secondary text-warning w-75 m-1 submit'>Create</button>
+//                 <button type="submit" className='btn btn-secondary text-warning w-75 m-1 submit'>Create</button> <button type="submit" className='btn btn-secondary text-warning w-75 m-1 submit'>Create</button>
 //             </div> */}
 //         </form>
 //     )
@@ -80,84 +80,89 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { MdCancel, MdCheckCircle } from "react-icons/md";
+
+import '../editInfo.css';
 
 function Editinfo({ data, onCancel, onSubmit }) {
-    const [name, setName] = useState('');
-    // const [surname, setSurname] = useState('');
-    // const [birthdate, setBirthdate] = useState('');
-    // const [town, setTown] = useState('');
-    // const [program, setProgram] = useState('');
-    // const [group, setGroup] = useState('');
-
+    const [name, setName] = useState(data.name);
+    const [surname, setSurname] = useState(data.surname);
+    const [birthdate, setBirthdate] = useState(data.birthdate);
+    const [town, setTown] = useState(data.town);
+    const [program, setProgram] = useState(data.program);
+    const [group, setGroup] = useState(data.group);
 
     const editStudent = (e) => {
         e.preventDefault();
         let updatedData = {
             name: name,
-            // surname: surname,
-            // birthdate: birthdate,
-            // town: town,
-            // group: group
+            surname: surname,
+            birthdate: birthdate,
+            town: town,
+            program: program,
+            group: group
         }
         onSubmit(e, updatedData)
     }
 
     return (
-        <tr>
+        <tr id='edit-row'>
             <td>
                 <input
                     type='text'
-                    defaultValue={data.name}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 >
                 </input>
             </td>
-            {/* <td>
+            <td>
                 <input
                     type='text'
-                value={data.surname}
-                // onChange={(e) => (e.target.value)}
+                    value={surname}
+                    onChange={(e) => setSurname(e.target.value)}
                 >
                 </input>
             </td>
             <td>
                 <input
                     type='text'
-                value={data.birthdate}
-                // onChange={(e) => (e.target.value)}
+                    value={birthdate}
+                    onChange={(e) => setBirthdate(e.target.value)}
                 >
                 </input>
             </td>
             <td>
                 <input
                     type='text'
-                value={data.town}
-                // onChange={(e) => (e.target.value)}
+                    value={town}
+                    onChange={(e) => setTown(e.target.value)}
                 >
                 </input>
             </td>
             <td>
                 <input
                     type='text'
-                value={data.program}
-                // onChange={(e) => (e.target.value)}
+                    value={program}
+                    onChange={(e) => setProgram(e.target.value)}
                 >
                 </input>
             </td>
             <td>
                 <input
                     type='text'
-                value={data.group}
-                // onChange={(e) => (e.target.value)}
+                    value={group}
+                    onChange={(e) => setGroup(e.target.value)}
                 >
                 </input>
-    </td> */}
+            </td>
             <td>
                 <button
-                    onClick={() => { onCancel() }}>Cancel
+                    className='cancel border-0 btn btn-danger text-warning mt-2'
+                    onClick={() => { onCancel() }}><MdCancel />
                 </button>
                 <button
-                    onClick={(e) => { editStudent(e) }}> Edit
+                    className='check border-0 btn btn-secondary text-warning mt-2'
+                    onClick={(e) => { editStudent(e) }}><MdCheckCircle />
                 </button>
             </td>
         </tr >

@@ -60,7 +60,7 @@ function StudentsMain() {
 
                     const dlt = users.filter((data) => data._id !== id);
                     setUsers(dlt);
-                    fetch(`${process.env.REACT_APP_API_PROXY_URI}/students${id}`, { method: 'DELETE' })
+                    fetch(`https://api-for-mern-app.onrender.com/api/v2/students/${id}`, { method: 'DELETE' })
                         .then(() => console.info(`${id} was deleted succesfully`));
 
                 } else if (result.isDenied) {
@@ -78,7 +78,7 @@ function StudentsMain() {
     //---HandleStudentEdit---//
     const submitEdit = (e, data) => {
         e.preventDefault();
-        fetch(`${process.env.REACT_APP_API_PROXY_URI}/students` + editId, {
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/students/` + editId, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
@@ -109,14 +109,14 @@ function StudentsMain() {
                     <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
                     <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
                     <Link to="/sform" className='navItem fw-bold mx-1 p-2'>Register student</Link>
-                    <p className='counter text-warning fs-5'>Counted users: {users.length}</p>
+                    <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
                     <div className='search'>
-                        <label><BiSearchAlt />Search:&nbsp;</label>
+                        <label><BiSearchAlt/>Search:&nbsp;</label>
                         <input type="text" value={searchTerm} onChange={handleSearch} className='text-dark' placeholder='Search students...' />
                     </div>
                 </div>
-                <div className='updating rounded fw-bold mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
-                    <HiOutlineSpeakerphone className='text-black mx-4 p-0' />
+                <div className='updating rounded fw-bold fs-5 mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
+                    <HiOutlineSpeakerphone className='text-black mx-4 p-0 fs-3' />
                     <span className='text-black'>This page is being updated at the moment!</span>
                 </div>
             </div>
@@ -153,7 +153,7 @@ function StudentsMain() {
                                     )}
                                 </Fragment>
                             ))
-                            : <tr><td className='loader'>Loading...</td></tr>
+                            : <tr><td>Loading...</td></tr>
                         ) : ''
                     }
                 </tbody>

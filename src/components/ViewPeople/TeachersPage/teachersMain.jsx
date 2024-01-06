@@ -20,12 +20,14 @@ function TeachersMain() {
 
     const getUsers = async () => {
         setLoading(true);
-        const response = await fetch(`${process.env.REACT_APP_API_PROXY_URI}/teachers`);
+        const response = await fetch('  https://api-for-mern-app.onrender.com/api/v2/teachers');
+        // const response = await fetch(`${process.env.REACT_APP_API_PROXY_URI}/teachers`);
         const users = await response.json();
         console.info(users);
         setUsers(users.data.teachers);
         setLoading(false);
     };
+
     useEffect(() => {
         getUsers();
     }, []);
@@ -58,7 +60,7 @@ function TeachersMain() {
 
                     const dlt = users.filter((data) => data._id !== id);
                     setUsers(dlt);
-                    fetch(`${process.env.REACT_APP_API_PROXY_URI}/teachers${id}`, { method: 'DELETE' })
+                    fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/${id}`, { method: 'DELETE' })
                         .then(() => console.info(`${id} was deleted succesfully`));
 
                 } else if (result.isDenied) {
@@ -76,7 +78,24 @@ function TeachersMain() {
     //---HandleTeacherEdit---//
     const submitEdit = (e, data) => {
         e.preventDefault();
-        console.log(data)
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/` + editId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                data
+            )
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.info('Success:', data);
+                getUsers();
+                cancelEdit();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     };
 
     //---CancelStudentEdit---//
@@ -92,7 +111,7 @@ function TeachersMain() {
                     <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
                     <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
                     <Link to="/tform" className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
-                    <p className='counter text-warning fs-5'>Counted users: {users.length}</p>
+                    <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
                     <div className='search'>
                         <label><BiSearchAlt />Search:&nbsp;</label>
                         <input type="text" value={searchTerm} onChange={handleSearch} className='text-dark' placeholder='Search students...' />
@@ -132,7 +151,7 @@ function TeachersMain() {
                                     )}
                                 </Fragment>
                             ))
-                            : <tr><td className='loader'>Loading...</td></tr>
+                            : <tr><td>Loading...</td></tr>
                         ) : ''
                     }
                 </tbody>

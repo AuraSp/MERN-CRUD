@@ -1,18 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&display=swap');
-
 h3,
 input {
-    font-family: 'Patrick Hand';
+    font-family: var(--font-family-Patrick);
 }
 
 input {
-    padding: 0.8em;
-    border-radius: 15px;
-    margin: 0.5em;
+    border-radius: 10px;
     text-align: center;
     outline: none;
     cursor: pointer;
-    color: grey;
+    color: var(--secondary-color);
 }
 
 select {
@@ -29,7 +25,15 @@ select {
 }
 
 button[type='submit'] {
-    font-family: 'Kalam';
+    font-family: var(--font-family-Dekko);
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+}
+
+button[type='submit']:hover{
+    box-shadow: none;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .text-danger {

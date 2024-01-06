@@ -2,7 +2,7 @@ import React from 'react';
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
 
-import './cards.css'
+import './card.css'
 
 function Teacherscards({ id, data, onEdit, onDelete }) {
     return (
@@ -15,8 +15,8 @@ function Teacherscards({ id, data, onEdit, onDelete }) {
             <td><span>{data.subjectGroup}</span></td>
             <td>
                 <button onClick={(e) => onDelete(e, id)} className='btn btn-danger border-0 text-warning mt-2'><MdDelete />
-                    <p className='d'>Remove</p></button>
-                <button onClick={(e) => onEdit(e, data)} className='btn btn-secondary border-0 text-warning mt-2'><AiFillEdit /><p className='e'>Edit</p></button>
+                    <p className='delete'>Remove</p></button>
+                <button onClick={(e) => onEdit(e, data)} className='btn btn-secondary border-0 text-warning mt-2'><AiFillEdit /><p className='edit'>Edit</p></button>
             </td>
         </tr>
     )

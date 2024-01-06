@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Swal from 'sweetalert2';
 
+import '../addinfo.css';
 
 function Form() {
 
@@ -64,7 +65,7 @@ function Form() {
     });
 
     const onSubmit = () => {
-        fetch(`${process.env.REACT_APP_API_PROXY_URI}teachers`, {
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -112,34 +113,34 @@ function Form() {
 
             <form onSubmit={handleSubmit(onSubmit)} className='form d-flex flex-column justify-content-center m-auto p-2 w-25'>
 
-                <h3 className='text-center my-4 fw-bold'>Teacher registration</h3>
+                <h3 className='text-center my-4 fw-bold text-white'>Teacher registration</h3>
 
                 <p className={errors.name ? 'text-danger text-center ' : ''}><input
                     {...register('name')}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="name"
-                    className='border border-2 m-1 w-100'
+                    className='border border-2 m-1 p-1 w-100'
                 />
                     {errors.name?.message}</p>
                 <p className={errors.surname ? 'text-danger text-center ' : ''}><input
                     {...register('surname')}
                     onChange={(e) => setSurname(e.target.value)}
                     placeholder="surname"
-                    className='border border-2 m-1 w-100'
+                    className='border border-2 m-1 p-1 w-100'
                 />
                     {errors.surname?.message}</p>
                 <p className={errors.birthdate ? 'text-danger text-center ' : ''}><input
                     {...register('birthdate')}
                     onChange={(e) => setBirthdate(e.target.value)}
                     placeholder='yyyy-mm-dd'
-                    className='border border-2 m-1 w-100'
+                    className='border border-2 m-1 p-1 w-100'
                 />
                     {errors.birthdate?.message}</p>
                 <p className={errors.town ? 'text-danger text-center ' : ''}><input
                     {...register('town')}
                     onChange={(e) => setTown(e.target.value)}
                     placeholder="town"
-                    className='border border-2 m-1 w-100'
+                    className='border border-2 m-1 p-1 w-100'
                 />
                     {errors.town?.message}</p>
                 <p className={errors.subject ? 'text-danger text-center ' : ''}>
@@ -147,7 +148,7 @@ function Form() {
                         {...register('subject')}
                         onChange={(e) => setSubject(e.target.value)}
                         defaultValue=''
-                        className='border border-2 bg-transparent m-1 w-100'
+                        className='border border-2 p-1 m-1 w-100'
                     >
                         <option value='' disabled>---Choose your subject--</option>
                         <option value='Javascript'>JavaScript</option>
@@ -161,7 +162,7 @@ function Form() {
                         {...register('subjectGroup')}
                         onChange={(e) => setsubjectGroup(e.target.value)}
                         defaultValue=''
-                        className='border border-2 bg-transparent m-1 w-100'
+                        className='border border-2 p-1 m-1 w-100'
                     >
                         <option value='' disabled>---Choose your subject group--</option>
                         <option value='1'>1 grupė</option>
@@ -171,7 +172,7 @@ function Form() {
                     {errors.subjectGroup?.message}</p>
 
                 <div className='text-center'>
-                    <button type="submit" className='btn btn-secondary text-warning w-75 m-1 submit'>Create</button>
+                    <button type="submit" className='btn btn-secondary w-75 m-1 submit'>Create</button>
                 </div>
             </form>
         </div >

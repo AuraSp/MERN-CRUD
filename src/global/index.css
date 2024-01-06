@@ -39,7 +39,8 @@
 
   ;
 
-  --font-family: Dekko
+  --font-family-Dekko: Dekko;
+  --font-family-Patrick: Patrick Hand
 }
 
 *,
@@ -77,7 +78,7 @@ body::before {
 
   z-index: -1;
   opacity: .6;
-  
+
   background-image: linear-gradient(to right bottom, #000, #1c0d0d, #2c150f, #3a1f0c, #422c059b, #523f059b, #5f54019b, #686b009b, #868d0086, #a3b20086, #c2d8004f, #ddff004f);
 }
 
