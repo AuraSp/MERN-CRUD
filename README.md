@@ -1,6 +1,6 @@
 <a name="wiki-top"></a>
 <p align="center">
-<a href='https://aurasp.github.io/MERN-crud/' target="_blank"><img src='https://github.com/AuraSp/MERN-crud/blob/main/public/Stack.png' width='300' height='300' alt='API logo' /></a>
+<a href='https://aurasp.github.io/MERN-crud/' target="_blank"><img src='https://github.com/AuraSp/MERN-crud/blob/main/public/assets/wiki/Stack.png' width='300' height='300' alt='API logo' /></a>
 </p>
 <h3 align='center'>Digital School Archive Application</h3>
 
