@@ -13,7 +13,7 @@ import StudentCard from './StudentCard';
 
 import './ViewInfo.css';
 
-function ViewStudent() {
+function ViewStudentV1({onToggle, version}) {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams('');
@@ -103,11 +103,11 @@ function ViewStudent() {
 
     return (
         <div className='row'>
-            <div className='col-lg-12 col-md-12 col-sm-12 navigation p-4'>
+            <div className='col-lg-12 col-md-12 col-sm-12 nav-list p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
-                    <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
-                    <Link to="/addstudent" className='navItem fw-bold mx-1 p-2'>Register student</Link>
+                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2'>Home</Link>
+                    <Link to={`${version}/teachers`} className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
+                    <Link to={`${version}/addstudent`} className='navItem fw-bold mx-1 p-2'>Register student</Link>
                     <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
                     <div className='search'>
                         <label><BiSearchAlt />Search:&nbsp;</label>
@@ -161,4 +161,4 @@ function ViewStudent() {
     )
 }
 
-export default ViewStudent
+export default ViewStudentV1;

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 import './AddForm.css';
 
-function AddTeacher() {
+function AddStudentV1({ onToggle, version }) {
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -65,7 +65,7 @@ function AddTeacher() {
     });
 
     const onSubmit = () => {
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers`, {
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/students`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -102,19 +102,19 @@ function AddTeacher() {
 
     return (
         <div className='row'>
-            <div className='col-lg-12 col-md-12 col-sm-12 navigation p-4'>
+            <div className='col-lg-12 col-md-12 col-sm-12 nav-list p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
-                    <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
-                    <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
+                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2'>Home</Link>
+                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2'>Students Page</Link>
+                    <Link to={`${version}/teachers`} className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
                 </div>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className='form d-flex flex-column justify-content-center m-auto p-2 w-25'>
 
-                <h3 className='text-center my-4 fw-bold text-white'>Teacher registration</h3>
+                <h3 className='text-center my-4 fw-bold text-white'>Student registration</h3>
 
-                <p className={errors.name ? 'text-danger text-center ' : ''}><input
+                <p className={errors.name ? 'text-danger text-center' : ''}><input
                     {...register('name')}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="name"
@@ -149,7 +149,7 @@ function AddTeacher() {
                         defaultValue=''
                         className='border border-2 p-1 m-1 w-100'
                     >
-                        <option value='' disabled>---Choose your subject--</option>
+                        <option value='' className='p-1' disabled>---Choose your subject--</option>
                         <option value='Javascript'>JavaScript</option>
                         <option value='Java'>Java</option>
                         <option value='PHP'>PHP</option>
@@ -177,4 +177,4 @@ function AddTeacher() {
         </div >
     );
 }
-export default AddTeacher;
+export default AddStudentV1;

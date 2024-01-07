@@ -1,0 +1,260 @@
+
+.table-nav-block {
+    display: flex;
+  }
+  
+  .table-nav-block .page-links {
+    font-size: 1em;
+    padding: .2em 5em;
+    background-color: #211f2c;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: min-content;
+  }
+  
+  .table-nav-block .page-links:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 0;
+  }
+  
+  .table-nav-block .page-links:nth-child(2),
+  .table-nav-block .page-links:last-child {
+    margin-left: -10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  .table-nav-block .page-links:last-child {
+    position: relative;
+    border-top-right-radius: 10px;
+  }
+  
+  .table-nav-block .page-links:last-child::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    height: 10px;
+    aspect-ratio: 1;
+    background-image: radial-gradient(circle at top right, transparent 10px, #211f2c 0);
+  }
+  
+  
+  .table-nav-block .page-links.active {
+    background-color: #3C3B4B;
+    border-bottom-left-radius: 10px;
+  }
+  
+  
+  
+  
+  .table-wrapper {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+  
+    background-color: #3C3B4B;
+    border-radius: 0 20px 20px 20px;
+  
+  }
+  
+  .table-wrapper table {
+    width: 100%;
+    display: block;
+    border-spacing: 0;
+    border: 1px inset transparent;
+    border-collapse: collapse;
+    overflow: hidden;
+  
+    border-radius: 20px;
+    user-select: none;
+  }
+  
+  .table-wrapper table *{
+    font-family: var(--font-family);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  
+  
+  .table-wrapper table tbody {
+    width: 100%;
+    overflow-y: auto;
+    display: block;
+    background-color: #fff;
+  
+    scrollbar-color: #DE3434 transparent;
+  
+  }
+  
+  .table-wrapper table thead {
+    background: #FAFAFC;
+    color: #000;
+    display: block;
+    width: 100%;
+  
+  }
+  
+  
+  .table-wrapper table tbody::-webkit-scrollbar {
+    width: 14px;
+  }
+  
+  .table-wrapper table tbody::-webkit-scrollbar-thumb {
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    background-color: #DE3434;
+    border-radius: 10px;
+  }
+  
+  .table-wrapper table tbody::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  .table-wrapper table tr {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    padding: 1em;
+  position: relative;
+  }
+  
+  .table-wrapper table tr:nth-child(even) {
+    background: #FAFAFC;
+  }
+  
+  .table-wrapper th,
+  .table-wrapper td {
+    display: inline-block;
+    width: 15%;
+    /* default width */
+    font-family: var(--font-family), monospace;
+    font-weight: 500;
+  }
+  
+  .table-wrapper th:first-child,
+  .table-wrapper td:first-child {
+    width: 8%;
+  }
+  
+  .table-wrapper th:nth-child(2),
+  .table-wrapper th:nth-child(5),
+  .table-wrapper td:nth-child(2),
+  .table-wrapper td:nth-child(5) {
+    width: 24.5%;
+  }
+  
+  .table-controls {
+    color: var(--accent-color);
+  
+  }
+  
+  .filter-control,
+  .add-control {
+    border: 2px solid #fff;
+    border-radius: 20px;
+  }
+  
+  .add-control {
+    background-color: #211f2c;
+  }
+  
+  .checked-border:before{
+    content: "";
+    position: absolute;
+  
+    left: 0;
+    top: 0;
+  
+    height: 100%;
+    width: 4px;
+    border-radius: 6px 0 0 6px;
+    background-color: #DE3434;
+  }
+  
+  input[type="checkbox"] {
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    width: 1.4em;
+    height: 1.4em;
+    text-align: center;
+  
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"]::before {
+    content: "";
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+  
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #000;
+    transition: 200ms background-color ease-in-out;
+    background-color: #fff;
+  }
+  
+  
+  input[type="checkbox"]:checked::before {
+    background-image: url('../../../../public/assets/app/check.png');
+    background-size: cover;
+    color: #fff;
+    background-color: #211f2c;
+  }
+  
+  
+  .popup {
+    background-color: #211f2c;
+  }
+  
+  .left-section .checked-count span {
+    padding: .2em .8em;
+    background-color: #3C3B4B;
+  }
+  
+  .right-section .action-button {
+    width: 8em;
+    padding: .6em 0;
+  }
+  
+  .right-section .action-button:last-of-type {
+    background-color: #3C3B4B;
+  }
+  
+  .form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    z-index: 1000; /* Ensure it's above other content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form-overlay-content {
+    background-color: #fff; /* White background for the content */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow effect */
+    position: relative;
+  }
+  
+  .form-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #000; /* Adjust the color as needed */
+    font-size: 18px;
+    cursor: pointer;
+  }

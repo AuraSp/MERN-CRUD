@@ -79,11 +79,11 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       </td>
       <td>
         <button
-          className='cancel border-0 btn btn-danger text-warning mt-2'
+          className='cancel border-0 btn btn-danger text-warning mt-2 me-1'
           onClick={() => { onCancel() }}><MdCancel />
         </button>
         <button
-          className='check border-0 btn btn-secondary text-warning mt-2'
+          className='check border-0 btn btn-secondary text-warning mt-2 ms-1'
           onClick={(e) => { editTeacher(e) }}><MdCheckCircle />
         </button>
       </td>

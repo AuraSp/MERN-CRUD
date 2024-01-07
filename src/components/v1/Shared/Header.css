@@ -1,4 +1,4 @@
-/* small screens */
+/* small screens
 .screen-sm {
     position: relative;
 }
@@ -115,7 +115,7 @@
     display: flex;
 }
 
-/* larger / medium screens */
+/* larger / medium screens 
 .top-link {
     background-color: var(--primary-color);
     border: 1px solid var(--accent-color);
@@ -132,7 +132,7 @@
     border-color: var(--secondary-color);
 }
 
-/* Repeating styles */
+
 .top-link {
     font-family: var(--font-family);
-}
+} */

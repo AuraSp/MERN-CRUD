@@ -12,7 +12,7 @@ import TeacherCard from './TeacherCard';
 
 import './ViewInfo.css';
 
-function ViewTeacher() {
+function ViewTeacherV1({onToggle, version}) {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams('');
@@ -105,11 +105,11 @@ function ViewTeacher() {
 
     return (
         <div className='row'>
-            <div className='col-lg-12 col-md-12 col-sm-12 navigation p-4'>
+            <div className='col-lg-12 col-md-12 col-sm-12 nav-list p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
-                    <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
-                    <Link to="/addteacher" className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
+                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2'>Home</Link>
+                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2'>Students Page</Link>
+                    <Link to={`${version}/addteacher`}  className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
                     <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
                     <div className='search'>
                         <label><BiSearchAlt />Search:&nbsp;</label>
@@ -159,4 +159,4 @@ function ViewTeacher() {
     )
 }
 
-export default ViewTeacher
+export default ViewTeacherV1;

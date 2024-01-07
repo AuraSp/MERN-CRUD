@@ -14,12 +14,12 @@ function StudentCard({ id, data, onDelete, onEdit }) {
             <td><span>{data.town}</span></td>
             <td><span>{data.group}</span></td>
             <td>
-                <button onClick={(e) => onDelete(e, id)} className='btn btn-danger border-0 text-warning mt-2'><MdDelete />
+                <button onClick={(e) => onDelete(e, id)} className='btn btn-danger border-0 text-warning mt-2 me-1'><MdDelete />
                     <p className='delete'>Remove</p></button>
-                <button onClick={(e) => onEdit(e, data)} className='btn btn-secondary border-0 text-warning mt-2'><AiFillEdit /><p className='edit'>Edit</p></button>
+                <button onClick={(e) => onEdit(e, data)} className='btn btn-secondary border-0 text-warning mt-2 ms-1'><AiFillEdit /><p className='edit'>Edit</p></button>
             </td>
         </tr >
     )
 }
 
-export default StudentCard
+export default StudentCard;

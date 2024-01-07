@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&family=Dekko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&family=Dekko&family=Fira+Mono:wght@500;700&display=swap');
 
 :root {
   --primary-color: #211f2c;
@@ -6,41 +6,25 @@
   --accent-color: #FFF;
   --active-action-color: #DE3434;
 
-  --language-colors: {
-    javascript: {
-      primary: #FFFED6,
-        secondary: #F1C868
-    }
+  --language-colors-JavaScript-primary: #FFFED6;
+  --language-colors-JavaScript-secondary: #F1C868;
 
-    ,
-    java: {
-      primary: #DDEDDC,
-        secondary: #2FA331
-    }
+  --language-colors-Java-primary: #DDEDDC;
+  --language-colors-Java-secondary: #2FA331;
 
-    ,
-    php: {
-      primary: #D1E8F6,
-        secondary: #12AAF3
-    }
+  --language-colors-PHP-primary: #D1E8F6;
+  --language-colors-PHP-secondary: #12AAF3;
 
-    ,
-    python: {
-      primary: #3C3B4B,
-        secondary: #111111
-    }
+  --language-colors-Python-primary: #3C3B4B;
+  --language-colors-Python-secondary: #111111;
 
-    ,
-    tester: {
-      primary: #E0A7A7,
-        secondary: #B04949
-    }
-  }
+  --language-colors-Tester-primary: #E0A7A7;
+  --language-colors-Tester-secondary: #B04949;
 
-  ;
-
+  --font-family-Fira: Fira Mono;
   --font-family-Dekko: Dekko;
-  --font-family-Patrick: Patrick Hand
+  --font-family-Patrick: Patrick Hand;
+  --font-family-Kalam: Kalam;
 }
 
 *,
@@ -51,6 +35,8 @@
   box-sizing: border-box;
 
   font-size: 100%;
+  font-family: var(--font-family-Fira), monospace;
+  font-weight: 700;
 }
 
 body {
@@ -59,7 +45,7 @@ body {
 
   height: 100vh;
 
-  background-image: url(../../public/archive-bg.jpeg);
+  background-image: url(../../public/assets/app/background.jpeg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -86,10 +72,29 @@ body::before {
   height: 100%;
 }
 
+.row {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .container-fluid * {
   padding: 0;
   margin: 0;
 
   text-decoration: none;
   list-style: none;
+}
+
+.top-block,
+.bottom-block {
+  flex: 1;
+}
+
+.mid-block {
+  flex: 5;
+
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
 }
