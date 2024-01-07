@@ -1,18 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { BiSearchAlt } from "react-icons/bi";
+import { HiOutlineSpeakerphone } from "react-icons/hi";
 import {
     Link,
     useSearchParams
 } from "react-router-dom";
-import Teacherscards from './teacherscards';
-import EditInfo from '../../EditPeople/EditTeachers/editinfo';
+import EditStudent from '../EditPeople/EditStudent';
+import StudentCard from './StudentCard';
 
-import './teachersmain.css';
+import './ViewInfo.css';
 
-function TeachersMain() {
+function ViewStudent() {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams('');
@@ -20,14 +21,12 @@ function TeachersMain() {
 
     const getUsers = async () => {
         setLoading(true);
-        const response = await fetch('  https://api-for-mern-app.onrender.com/api/v2/teachers');
-        // const response = await fetch(`${process.env.REACT_APP_API_PROXY_URI}/teachers`);
+        const response = await fetch(`https://api-for-mern-app.onrender.com/api/v2/students`);
         const users = await response.json();
         console.info(users);
-        setUsers(users.data.teachers);
+        setUsers(users.data.students);
         setLoading(false);
     };
-
     useEffect(() => {
         getUsers();
     }, []);
@@ -43,8 +42,9 @@ function TeachersMain() {
         }
     };
 
-    //---DeleteTeacher---//
+    //---DeleteStudent---//
     function handleDelete(e, id) {
+        e.preventDefault();
         Swal
             .fire({
                 title: 'Are you sure?',
@@ -60,7 +60,7 @@ function TeachersMain() {
 
                     const dlt = users.filter((data) => data._id !== id);
                     setUsers(dlt);
-                    fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/${id}`, { method: 'DELETE' })
+                    fetch(`https://api-for-mern-app.onrender.com/api/v2/students/${id}`, { method: 'DELETE' })
                         .then(() => console.info(`${id} was deleted succesfully`));
 
                 } else if (result.isDenied) {
@@ -75,14 +75,12 @@ function TeachersMain() {
         setEditId(data._id);
     };
 
-    //---HandleTeacherEdit---//
+    //---HandleStudentEdit---//
     const submitEdit = (e, data) => {
         e.preventDefault();
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/` + editId, {
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/students/` + editId, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
                 data
             )
@@ -108,14 +106,17 @@ function TeachersMain() {
             <div className='col-lg-12 col-md-12 col-sm-12 navigation p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
                     <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
                     <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
-                    <Link to="/tform" className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
+                    <Link to="/addstudent" className='navItem fw-bold mx-1 p-2'>Register student</Link>
                     <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
                     <div className='search'>
                         <label><BiSearchAlt />Search:&nbsp;</label>
                         <input type="text" value={searchTerm} onChange={handleSearch} className='text-dark' placeholder='Search students...' />
                     </div>
+                </div>
+                <div className='updating rounded fw-bold fs-5 mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
+                    <HiOutlineSpeakerphone className='text-black mx-4 p-0 fs-3' />
+                    <span className='text-black'>This page is being updated at the moment!</span>
                 </div>
             </div>
             <table className='table mt-3'>
@@ -125,8 +126,8 @@ function TeachersMain() {
                         <th>Surname</th>
                         <th>Birthdate</th>
                         <th>Town</th>
-                        <th>Subject</th>
-                        <th>Subject Group</th>
+                        <th>Program</th>
+                        <th>Group</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -136,13 +137,13 @@ function TeachersMain() {
                             users.filter(data => data.name.toLowerCase().includes(searchTerm.toLowerCase())).map((data) => (
                                 <Fragment key={data._id}>
                                     {editId === data._id ? (
-                                        <EditInfo
+                                        <EditStudent
                                             data={data}
                                             onCancel={cancelEdit}
                                             onSubmit={submitEdit}
                                         />
                                     ) : (
-                                        <Teacherscards
+                                        <StudentCard
                                             id={data._id}
                                             data={data}
                                             onDelete={handleDelete}
@@ -156,8 +157,8 @@ function TeachersMain() {
                     }
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
 
-export default TeachersMain
+export default ViewStudent

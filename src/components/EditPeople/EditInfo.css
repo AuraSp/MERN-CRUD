@@ -32,10 +32,6 @@ svg {
     color: #e6a502;
 }
 
-#edit-row{
-    border: 1px solid red;
-}
-
 #edit-row input{
     border: 0;
     border-bottom: 1px solid var(--primary-color);

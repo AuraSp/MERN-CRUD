@@ -5,9 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Swal from 'sweetalert2';
 
-import '../addinfo.css';
+import './AddForm.css';
 
-function Form() {
+function AddTeacher() {
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -65,7 +65,7 @@ function Form() {
     });
 
     const onSubmit = () => {
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/students`, {
+        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -107,15 +107,14 @@ function Form() {
                     <Link to="/" className='navItem fw-bold mx-1 p-2'>Home</Link>
                     <Link to="/students" className='navItem fw-bold mx-1 p-2'>Students Page</Link>
                     <Link to="/teachers" className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
-                    <Link to="/tform" className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
                 </div>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className='form d-flex flex-column justify-content-center m-auto p-2 w-25'>
 
-                <h3 className='text-center my-4 fw-bold text-white'>Student registration</h3>
+                <h3 className='text-center my-4 fw-bold text-white'>Teacher registration</h3>
 
-                <p className={errors.name ? 'text-danger text-center' : ''}><input
+                <p className={errors.name ? 'text-danger text-center ' : ''}><input
                     {...register('name')}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="name"
@@ -150,7 +149,7 @@ function Form() {
                         defaultValue=''
                         className='border border-2 p-1 m-1 w-100'
                     >
-                        <option value='' className='p-1' disabled>---Choose your subject--</option>
+                        <option value='' disabled>---Choose your subject--</option>
                         <option value='Javascript'>JavaScript</option>
                         <option value='Java'>Java</option>
                         <option value='PHP'>PHP</option>
@@ -178,4 +177,4 @@ function Form() {
         </div >
     );
 }
-export default Form;
+export default AddTeacher;

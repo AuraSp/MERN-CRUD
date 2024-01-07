@@ -82,9 +82,9 @@ import React from 'react';
 import { useState } from 'react';
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 
-import '../editInfo.css';
+import './EditInfo.css';
 
-function Editinfo({ data, onCancel, onSubmit }) {
+function EditStudent({ data, onCancel, onSubmit }) {
     const [name, setName] = useState(data.name);
     const [surname, setSurname] = useState(data.surname);
     const [birthdate, setBirthdate] = useState(data.birthdate);
@@ -169,4 +169,4 @@ function Editinfo({ data, onCancel, onSubmit }) {
     )
 }
 
-export default Editinfo
+export default EditStudent

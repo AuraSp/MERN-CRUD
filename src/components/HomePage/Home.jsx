@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import HeaderSM from '../Shared/Header/Header-sm';
-import HeaderLGMG from '../Shared/Header/Header-lg-md';
+import HeaderSM from '../Shared/Header-sm';
+import HeaderLGMG from '../Shared/Header-lg-md';
 
 import './home.css';
 
