@@ -72,7 +72,7 @@ function Home({ version, onToggle }) {
     };
 
     return (
-        <div className="row w-100">
+        <div className="row w-100 h-100 d-flex flex-column">
             {isSmallScreen ?
 
                 <div className='col-12 top-block'>
@@ -81,8 +81,8 @@ function Home({ version, onToggle }) {
                             className={`text-white ${isNavOpen ? 'opacity-0' : ''} border-0 bg-transparent btn--open`}>
                         </button>
                         <nav className={`vh-100 w-100 flex-column justify-content-center align-items-center nav-block ${isNavOpen ? 'show-nav' : ''}`}>
-                            <Link to="/students" className='my-3 fs-1 text-white fw-bold'>Students</Link>
-                            <Link to="/teachers" className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
+                            <Link  to={`${version}/students`} className='my-3 fs-1 text-white fw-bold'>Students</Link>
+                            <Link to={`${version}/students`} className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
                             <button onClick={closeNavbar} className='text-white border-0 bg-transparent px-5 py-3 btn--close'>&#215;</button>
                         </nav>
                     </div>

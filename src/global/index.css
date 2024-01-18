@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Patrick+Hand&family=Dekko&family=Fira+Mono:wght@500;700&display=swap');
 
 :root {
+
+  --font-family-Fira: Fira Mono;
+  --font-family-Dekko: Dekko;
+  --font-family-Patrick: Patrick Hand;
+  --font-family-Kalam: Kalam;
+
+  /* v2 */
   --primary-color: #211f2c;
   --secondary-color: #3C3B4B;
   --accent-color: #FFF;
   --active-action-color: #DE3434;
 
   --language-colors-JavaScript-primary: #FFFED6;
-  --language-colors-JavaScript-secondary: #F1C868;
+  --language-colors-JavaScript-secondary: #F1C810;
 
   --language-colors-Java-primary: #DDEDDC;
   --language-colors-Java-secondary: #2FA331;
@@ -15,16 +22,15 @@
   --language-colors-PHP-primary: #D1E8F6;
   --language-colors-PHP-secondary: #12AAF3;
 
-  --language-colors-Python-primary: #3C3B4B;
-  --language-colors-Python-secondary: #111111;
+  --language-colors-Python-primary: #111111;
+  --language-colors-Python-secondary: #b5b5ff;
 
   --language-colors-Tester-primary: #E0A7A7;
   --language-colors-Tester-secondary: #B04949;
 
-  --font-family-Fira: Fira Mono;
-  --font-family-Dekko: Dekko;
-  --font-family-Patrick: Patrick Hand;
-  --font-family-Kalam: Kalam;
+  /* v1 */
+  --bg-color: #2f48588e;
+  --txt-color: #d49801;
 }
 
 *,
@@ -49,6 +55,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
 }
 
 body::before {
@@ -69,13 +76,7 @@ body::before {
 }
 
 #root {
-  height: 100%;
-}
-
-.row {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  height: 100vh;
 }
 
 .container-fluid * {

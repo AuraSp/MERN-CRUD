@@ -104,9 +104,9 @@ function AddTeacherV1({onToggle, version}) {
         <div className='row'>
             <div className='col-lg-12 col-md-12 col-sm-12 nav-list p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
-                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2'>Students Page</Link>
-                    <Link to={`${version}/teachers`} className='navItem fw-bold mx-1 p-2'>Teachers Page</Link>
+                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Home</Link>
+                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Students Page</Link>
+                    <Link to={`${version}/teachers`} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Teachers Page</Link>
                 </div>
             </div>
 
@@ -117,29 +117,29 @@ function AddTeacherV1({onToggle, version}) {
                 <p className={errors.name ? 'text-danger text-center ' : ''}><input
                     {...register('name')}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="name"
-                    className='border border-2 m-1 p-1 w-100'
+                    placeholder="Example: Bob"
+                    className='border-0 rounded m-1 p-1 w-100 text-secondary text-center'
                 />
                     {errors.name?.message}</p>
                 <p className={errors.surname ? 'text-danger text-center ' : ''}><input
                     {...register('surname')}
                     onChange={(e) => setSurname(e.target.value)}
-                    placeholder="surname"
-                    className='border border-2 m-1 p-1 w-100'
+                    placeholder="Example: Smith"
+                    className='border-0 rounded m-1 p-1 w-100 text-secondary text-center'
                 />
                     {errors.surname?.message}</p>
                 <p className={errors.birthdate ? 'text-danger text-center ' : ''}><input
                     {...register('birthdate')}
                     onChange={(e) => setBirthdate(e.target.value)}
-                    placeholder='yyyy-mm-dd'
-                    className='border border-2 m-1 p-1 w-100'
+                    placeholder='Example: yyyy-mm-dd'
+                    className='border-0 rounded m-1 p-1 w-100 text-secondary text-center'
                 />
                     {errors.birthdate?.message}</p>
                 <p className={errors.town ? 'text-danger text-center ' : ''}><input
                     {...register('town')}
                     onChange={(e) => setTown(e.target.value)}
-                    placeholder="town"
-                    className='border border-2 m-1 p-1 w-100'
+                    placeholder="Example: Kaunas"
+                    className='border-0 rounded m-1 p-1 w-100 text-secondary text-center'
                 />
                     {errors.town?.message}</p>
                 <p className={errors.subject ? 'text-danger text-center ' : ''}>
@@ -147,7 +147,7 @@ function AddTeacherV1({onToggle, version}) {
                         {...register('subject')}
                         onChange={(e) => setSubject(e.target.value)}
                         defaultValue=''
-                        className='border border-2 p-1 m-1 w-100'
+                        className='border-0 rounded p-1 m-1 w-100 text-secondary text-center'
                     >
                         <option value='' disabled>---Choose your subject--</option>
                         <option value='Javascript'>JavaScript</option>
@@ -161,7 +161,7 @@ function AddTeacherV1({onToggle, version}) {
                         {...register('subjectGroup')}
                         onChange={(e) => setsubjectGroup(e.target.value)}
                         defaultValue=''
-                        className='border border-2 p-1 m-1 w-100'
+                        className='border-0 rounded p-1 m-1 w-100 text-secondary text-center'
                     >
                         <option value='' disabled>---Choose your subject group--</option>
                         <option value='1'>1 grupė</option>
@@ -171,7 +171,7 @@ function AddTeacherV1({onToggle, version}) {
                     {errors.subjectGroup?.message}</p>
 
                 <div className='text-center'>
-                    <button type="submit" className='btn btn-secondary w-75 m-1 submit'>Create</button>
+                    <button type="submit" className='btn btn-secondary text-white w-75 m-1 submit'>Create</button>
                 </div>
             </form>
         </div >

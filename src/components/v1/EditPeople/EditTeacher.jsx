@@ -32,6 +32,7 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       <td>
         <input
           type='text'
+          className='text-center p-2'
           value={name}
           onChange={(e) => setName(e.target.value)}
         >
@@ -40,6 +41,7 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       <td>
         <input
           type='text'
+          className='text-center'
           value={surname}
           onChange={(e) => setSurname(e.target.value)}
         >
@@ -47,8 +49,9 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       </td>
       <td>
         <input
-          type='text'
-          value={birthdate}
+          type='date'
+          className='text-center'
+          value={birthdate.slice(0,10)}
           onChange={(e) => setBirthdate(e.target.value)}
         >
         </input>
@@ -56,6 +59,7 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       <td>
         <input
           type='text'
+          className='text-center'
           value={data.town}
           onChange={(e) => setTown(e.target.value)}
         >
@@ -64,6 +68,7 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       <td>
         <input
           type='text'
+          className='text-center'
           value={data.subject}
           onChange={(e) => setSubject(e.target.value)}
         >
@@ -72,6 +77,7 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       <td>
         <input
           type='text'
+          className='text-center'
           value={data.subjectGroup}
           onChange={(e) => setSubjectGroup(e.target.value)}
         >
@@ -79,11 +85,11 @@ function EditTeacher({ data, onCancel, onSubmit }) {
       </td>
       <td>
         <button
-          className='cancel border-0 btn btn-danger text-warning mt-2 me-1'
-          onClick={() => { onCancel() }}><MdCancel />
+          className='cancel border-0 btn btn-danger text-warning mt-2 me-1 fw-bold'
+          onClick={() => { onCancel() }}><MdCancel className='fs-4'/>
         </button>
         <button
-          className='check border-0 btn btn-secondary text-warning mt-2 ms-1'
+          className='check border-0 btn btn-secondary text-warning mt-2 ms-1 fw-bold'
           onClick={(e) => { editTeacher(e) }}><MdCheckCircle />
         </button>
       </td>

@@ -1,94 +1,23 @@
-.nav-list {
-    font-family: var(--font-family-Dekko);
-}
-
-table {
-    font-family: var(--font-family-Patrick);
-    width: 100%;
-}
-
-.block-container {
-    width: 80%;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-.logo-name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-}
-
-.logo-name img {
-    width: 40px;
-    /* Adjust the size as needed */
-    height: 40px;
-    /* Maintain aspect ratio */
-    margin-right: 10px;
-}
-
-.logo-name span {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.link-image img {
-    width: 30px;
-    /* Adjust the size as needed */
-    height: 30px;
-    /* Maintain aspect ratio */
-}
-
-.link-image a {
-    display: block;
-}
-
 .search {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    font-size: 1.4em;
-    color: #fff;
     transform: translateX(20vw);
 }
 
-.search label svg {
-    position: relative;
-    bottom: 0.1em;
-    font-size: 1.4em;
-}
-
 .search input {
-    border: 1px solid transparent;
-    background-color: #8f6c6c;
-    padding: 0.5em;
+    background-color: var(--bg-color);
     font-size: 0.6em;
-    border-radius: 15px;
-    text-align: center;
     outline: none;
 }
-
-.search input:focus {
-    outline: none;
-    border: 3px solid #993f3f;
-}
-
 
 .navItem {
-    background-color: #2f48588e;
-    border: 1px solid #fff;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 1.1em;
-    text-decoration: none;
+    background-color: var(--bg-color);
+    color: var(--accent-color);
+    font-size: 1em;
     transition: .3s linear;
     width: 12em;
 }
 
 .navItem:hover {
-    color: #2f4858;
-    background-color: #ffffff8e;
-    border-color: #2f48588e;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: 1px solid var(--bg-color);
 }

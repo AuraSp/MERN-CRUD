@@ -1,4 +1,4 @@
-
+/* 
 
 *{
     margin: 0;
@@ -75,16 +75,12 @@ li {
 span{
     color: #c59008;
     font-weight: 600;
-}
+} */
 /* 
 table td span{
     display: block;
     margin-top: 1em;
 } */
-
-tbody{
-    font-family: 'Patrick Hand';
-}
 
 span.program {
     display: inline-block;

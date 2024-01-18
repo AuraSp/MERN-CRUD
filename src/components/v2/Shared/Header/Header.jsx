@@ -7,7 +7,7 @@ import { VscGithub } from "react-icons/vsc";
 
 import './Header.css';
 const archive = `${process.env.PUBLIC_URL}/assets/app/archive.png`;
-function Header() {
+function Header({version}) {
 
     const [screenSize, setScreenSize] = useState('');
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -57,8 +57,8 @@ function Header() {
                         </button>
                         <nav className={`vh-100 w-100 flex-column justify-content-center align-items-center nav-block ${isNavOpen ? 'show-nav' : ''}`}>
                             <Link to="/" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Home</Link>
-                            <Link to="/students" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Students</Link>
-                            <Link to="/teachers" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
+                            <Link to={`${version}/students`} onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Students</Link>
+                            <Link to={`${version}/teachers`} onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
                             <button onClick={closeNavbar} className='text-white border-0 bg-transparent px-5 py-3 btn--close'>&#215;</button>
                         </nav>
                     </div>
@@ -66,16 +66,15 @@ function Header() {
             )}
 
             {screenSize === 'medium' && (
-                <div className='col-12 d-flex justify-content-center align-items-center text-white top-block'>
+                <div className='col-12 d-flex justify-content-center align-items-center text-white top-block z-1'>
                     <div className='w-75 rounded-pill d-flex align-items-center px-5 py-3 shared--header'>
                         <div className='medium-screen'>
                             <button onClick={showNavbar}
                                 className={`text-white ${isNavOpen ? 'opacity-0' : ''} border-0 bg-transparent btn--open`}>
                             </button>
                             <nav className={`vh-100 w-100 flex-column justify-content-center align-items-center nav-block ${isNavOpen ? 'show-nav' : ''}`}>
-                                <Link to="/" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Home</Link>
-                                <Link to="/students" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Students</Link>
-                                <Link to="/teachers" onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
+                                <Link to={`${version}/students`} onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Students</Link>
+                                <Link to={`${version}/teachers`} onClick={closeNavbar} className='my-3 fs-1 text-white fw-bold'>Teachers</Link>
                                 <button onClick={closeNavbar} className='text-white border-0 bg-transparent px-5 py-3 btn--close'>&#215;</button>
                             </nav>
                         </div>

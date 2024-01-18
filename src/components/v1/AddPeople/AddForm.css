@@ -1,49 +1,18 @@
-h3,
-input {
+.form h3,
+.form input, .text-danger, .form select {
     font-family: var(--font-family-Patrick);
 }
 
-input {
-    border-radius: 10px;
-    text-align: center;
+.form input, .form select {
     outline: none;
     cursor: pointer;
-    color: var(--secondary-color);
 }
 
-select {
-    border-radius: 10px;
-    padding: 0.8em;
-    outline: none;
-    text-align: center;
-    cursor: pointer;
-}
-
-input[type="date"],
-select {
-    color: grey;
-}
-
-button[type='submit'] {
-    font-family: var(--font-family-Dekko);
+.form button[type='submit'] {
+    font-family: var(--font-family-Dekko), monospace;
     background-color: var(--secondary-color);
-    color: var(--accent-color);
 }
 
-button[type='submit']:hover{
-    box-shadow: none;
+.form button[type='submit']:hover {
     background-color: var(--primary-color);
-    color: var(--accent-color);
-}
-
-.text-danger {
-    position: relative;
-    font-weight: 600;
-    font-size: 0.9em;
-    font-family: 'Patric Hand';
-}
-
-.text-danger:focus-within input,
-.text-danger:focus-within select {
-    color: #dc3546da;
 }

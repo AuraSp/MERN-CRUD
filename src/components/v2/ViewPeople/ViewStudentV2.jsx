@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import { BiFilter, BiTrash, BiEditAlt } from "react-icons/bi";
 import StudentCard from './StudentCard';
 import './ViewInfo.css';
 import Header from '../Shared/Header/Header';
+import FormComponent from '../AddPeople/FormComponent';
+import Actions from '../Shared/Actions/Actions';
+import EditComponent from '../EditPeople/EditComponent';
 
 const home = `${process.env.PUBLIC_URL}/assets/app/home.png`;
 const arrow = `${process.env.PUBLIC_URL}/assets/app/arrow.png`;
@@ -11,23 +14,35 @@ const arrow = `${process.env.PUBLIC_URL}/assets/app/arrow.png`;
 function ViewStudentV2({ version }) {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
+    const [userType, setUserType] = useState([]);
     const [checkedUserIds, setCheckedUserIds] = useState([]);
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [isRendering, setIsRendering] = useState(false);
+    const [query, setQuery] = useState('');
+    const [editingUserIds, setEditingUserIds] = useState([]);
 
     const getUsers = async () => {
-        setLoading(true);
-        const response = await fetch(`https://api-for-mern-app.onrender.com/api/v2/students`);
-        const users = await response.json();
-        // console.info(users);
-        setUsers(users.data.students);
-        setLoading(false);
+        try {
+            setLoading(true);
+            const response = await fetch(`https://api-for-mern-app.onrender.com/api/v2/students`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const users = await response.json();
+            setUsers(users.data.students);
+            setUserType(users.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
     };
+
 
     useEffect(() => {
         getUsers();
-    }, []);
+    }, [isRendering]);
 
     const handleCheckboxChange = (userId) => {
         setCheckedUserIds((prevState) => {
@@ -47,7 +62,6 @@ function ViewStudentV2({ version }) {
 
 
     const handleCheckAllChange = () => {
-        console.log('g')
         setIsCheckAll((prevIsCheckAll) => {
             console.log(isCheckAll)
             if (prevIsCheckAll) {
@@ -64,14 +78,6 @@ function ViewStudentV2({ version }) {
         setIsCheckAll(!isCheckAll);
     };
 
-    const handleFormClick = () => {
-        setIsFormOpen(!isFormOpen);
-    }
-
-    const handleFilterClick = () => {
-        setIsFilterOpen(!isFilterOpen);
-    }
-
 
     const { pathname } = useLocation();
 
@@ -87,29 +93,37 @@ function ViewStudentV2({ version }) {
         const calculateTableHeight = () => {
             const sectionHeight = sectionRef.current.clientHeight;
             const newTableHeight = `calc(100% - ${sectionHeight}px)`;
-            const tbodyHeight = tbodyRef.current.clientHeight;
 
             setTableHeight(newTableHeight);
-            setTbodyHeight(`calc(${tableHeight} + 12px)`);
-            // console.log(tableHeight, tbodyHeight);
-
-
+            setTbodyHeight(`calc(${newTableHeight} - 20px)`);
         };
 
         calculateTableHeight();
 
-        // Attach a resize event listener to handle changes when the window is resized
         window.addEventListener('resize', calculateTableHeight);
 
         return () => {
-            // Remove the resize event listener when the component unmounts
             window.removeEventListener('resize', calculateTableHeight);
         };
-    }, [tableHeight]);
+    }, []);
+
+
+
+    const keys = ["name", "surname", "town", "birthdate", "program", "group", "subject", "subjectGroup"];
+
+    const search = (data) => {
+        return data.filter(
+            (item) =>
+                keys.some((key) => {
+                    const value = item[key];
+                    return value && typeof value === 'string' && value.toLowerCase().includes(query);
+                })
+        );
+    };
 
     return (
-        <div className='row w-100'>
-            <Header />
+        <div className='row w-100 h-100 d-flex flex-column'>
+            <Header version={version} />
             <div className='mid-block'>
                 <nav className='table-nav-block'>
                     <NavLink to="/" className={`page-links ${pathname === '/' ? 'active' : ''}`}>
@@ -121,21 +135,19 @@ function ViewStudentV2({ version }) {
                 </nav>
                 <div className='table-wrapper pt-4 pb-4 px-3'>
                     <section className='d-flex align-items-center justify-content-between table-controls mb-2 mx-4' ref={sectionRef}>
-                        <button className='filter-control bg-transparent text-white py-1 px-2' onClick={handleFilterClick}><BiFilter className='mx-2 fs-4' />Filter people</button>
+                        <div className='filter-control py-1 px-3'>
+                            <BiFilter className='fs-4' />
+                            <span className='ms-3'>Filter people</span>
+                            <input type='text' onChange={(e) => setQuery(e.target.value)} className='filter-input' />
+                        </div>
 
                         <span className='rows-length'> {users.length} {users.length === 1 ? 'student' : 'students'} counted</span>
-                        <button className='add-control text-white py-1 px-4' onClick={handleFormClick}>+ New Student</button>
+                        <button className='add-control text-white py-1 px-4' onClick={() => setIsFormOpen(true)}>+ New Student</button>
 
-                        {isFormOpen && (
-                            <div className='form-overlay'>
-                                <div className='form-overlay-content'>
-                                    This is the content of the overlay
-                                    <button className='form-close-button' onClick={() => setIsFormOpen(false)}>X</button>
-                                </div>
-                            </div>
-                        )}
-
+                        {isFormOpen &&
+                            <FormComponent userType={userType} setIsFormOpen={setIsFormOpen} setIsRendering={setIsRendering} />}
                     </section>
+
                     <table className='w-100' ref={tableRef} style={{ height: tableHeight }}>
                         <thead>
                             <tr>
@@ -153,47 +165,53 @@ function ViewStudentV2({ version }) {
                             </tr>
                         </thead>
                         <tbody ref={tbodyRef} style={{ height: tbodyHeight }}>
-                            {users.length > 0 ? (
-                                users.map((user) => (
-                                    <StudentCard
-                                        key={user.id}
-                                        data={user}
-                                        checked={checkedUserIds.includes(user._id)}
-                                        onCheckboxChange={() => handleCheckboxChange(user._id)}
-                                    />
-                                ))
-                            ) : (
+                            {!loading ? (
+                                search(users).length > 0 ? (
+                                    search(users).map((user) => (
+                                        editingUserIds.includes(user._id) ? (
+                                            <EditComponent
+                                                key={user._id} />
+                                        ) : (
+                                            <StudentCard
+                                                key={user._id}
+                                                data={user}
+                                                checked={checkedUserIds.includes(user._id)}
+                                                onCheckboxChange={() => handleCheckboxChange(user._id)}
+                                            />
+                                        )
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td className='w-100 pt-5'>No users found. Add a new user by pressing '+ New Student' button <img src={arrow} alt='arrow-up' className='ms-5' /></td>
+                                    </tr>
+                                )) :
                                 <tr>
-                                    <td className='w-100 pt-5'>No users found. Add a new user by pressing '+ New Student' button <img src={arrow} alt='arrow-up' className='ms-5' /></td>
+                                    <td colSpan={3} className=''>
+                                        <div className='loader-wrapper d-flex flex-column align-items-center justify-content-center position-relative'>
+                                            <div className="circle"></div>
+                                            <div className="circle"></div>
+                                            <div className="circle"></div>
+                                            <span className='loader-text position-absolute'>Loading...one sec</span>
+                                        </div>
+                                    </td>
                                 </tr>
-                            )}
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
             <div className='bottom-block'>
                 {checkedUserIds.length > 0 && (
-                    <div className="popup-container h-100 d-flex align-items-center justify-content-center">
-                        <div className="popup w-50 d-flex justify-content-between align-items-center rounded-pill py-3 px-4">
-                            <div className="left-section d-flex align-items-center">
-                                <button className="close-button border-0 bg-transparent text-white fs-4 mx-3" onClick={handlePopupClose}>X</button>
-                                <div className="checked-count text-white"><span className='rounded-pill'>{checkedUserIds.length}</span> {checkedUserIds.length === 1 ? 'student' : 'students'} selected</div>
-                            </div>
-                            <div className="right-section d-flex">
-                                <button className="action-button border-0 bg-danger rounded-pill me-1 text-white"><BiTrash className='me-1 fs-5' />Delete</button>
-                                <button className="action-button border-0 rounded-pill ms-1 text-white"><BiEditAlt className='me-1 fs-5' />Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {isFilterOpen && (
-                    <div className='popup-container h-100 filter-overlay d-flex align-items-center justify-content-center'>
-                        <div className='popup w-50 rounded-pill filter-content py-3 px-4'>
-                            This is the content for the filter
-                            <button className='filter-close-button' onClick={() => setIsFilterOpen(false)}>X</button>
-                        </div>
-                    </div>
+                    <Actions
+                        setIsRendering={setIsRendering}
+                        users={users}
+                        setUsers={setUsers}
+                        handlePopupClose={handlePopupClose}
+                        setCheckedUserIds={setCheckedUserIds}
+                        checkedUserIds={checkedUserIds}
+                        setIsCheckAll={setIsCheckAll}
+                        isCheckAll={isCheckAll}
+                        setEditingUserIds={setEditingUserIds} />
                 )}
             </div>
         </div>

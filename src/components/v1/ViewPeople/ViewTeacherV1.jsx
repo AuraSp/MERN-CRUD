@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { BiSearchAlt } from "react-icons/bi";
+import { HiOutlineSpeakerphone } from "react-icons/hi";
 import {
     Link,
     useSearchParams
@@ -12,7 +13,7 @@ import TeacherCard from './TeacherCard';
 
 import './ViewInfo.css';
 
-function ViewTeacherV1({onToggle, version}) {
+function ViewTeacherV1({ onToggle, version }) {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams('');
@@ -107,17 +108,21 @@ function ViewTeacherV1({onToggle, version}) {
         <div className='row'>
             <div className='col-lg-12 col-md-12 col-sm-12 nav-list p-4'>
                 <div className='d-flex flex-row align-items-center text-center'>
-                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2'>Home</Link>
-                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2'>Students Page</Link>
-                    <Link to={`${version}/addteacher`}  className='navItem fw-bold mx-1 p-2'>Register teacher</Link>
+                    <Link to="/" onClick={onToggle} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Home</Link>
+                    <Link to={`${version}/students`} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Students Page</Link>
+                    <Link to={`${version}/addteacher`} className='navItem fw-bold mx-1 p-2 border border-white rounded-pill text-decoration-none'>Register teacher</Link>
                     <p className='counter text-warning fs-5 ms-3 fw-bold'>Counted users: {users.length}</p>
-                    <div className='search'>
-                        <label><BiSearchAlt />Search:&nbsp;</label>
-                        <input type="text" value={searchTerm} onChange={handleSearch} className='text-dark' placeholder='Search students...' />
+                    <div className='search d-flex flex-row flex-nowrap align-items-center text-white fs-5'>
+                        <label><BiSearchAlt className='fs-4 me-1' />Search:&nbsp;</label>
+                        <input type="text" value={searchTerm} onChange={handleSearch} className='text-white border border-white p-2 rounded-pill text-center' placeholder='Search students...' />
                     </div>
                 </div>
             </div>
-            <table className='table mt-3'>
+            <div className='updating rounded fw-bold mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
+                <HiOutlineSpeakerphone className='text-black mx-3 p-0 fs-3' />
+                <span className='text-black'>This is the old version. Redirect to newiest one from home page!</span>
+            </div>
+            <table className='table'>
                 <thead className='thead-dark text-center'>
                     <tr>
                         <th>Name</th>
@@ -150,7 +155,7 @@ function ViewTeacherV1({onToggle, version}) {
                                     )}
                                 </Fragment>
                             ))
-                            : <tr><td>Loading...</td></tr>
+                            : <tr className='fs-4'><td colSpan={7}>Loading...</td></tr>
                         ) : ''
                     }
                 </tbody>
