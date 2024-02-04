@@ -1,0 +1,20 @@
+/* repeating components' styles */
+.edit-rows input,
+.edit-rows select {
+    outline: 1px solid var(--primary-color);
+}
+
+
+
+/* Edit action button */
+.edit-rows__column .editbutton:last-of-type svg {
+    background-color: var(--secondary-color);
+}
+
+
+
+/* Edit rows' select element */
+.edit-rows select {
+    text-indent: 2px;
+    padding: 0.1em 0;
+}

@@ -77,13 +77,18 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
 
 
     const onSubmit = async (sendData) => {
-        console.log('Form data:', sendData);
+        console.debug('%cForm data:', 'color:blue', sendData);
+
 
         try {
             await userSchema.validate(sendData);
-            console.info('Validation passed');
+            console.warn('%cValidation:', 'color:orange', 'Validation passed');
 
-            fetch(`https://api-for-mern-app.onrender.com/api/v2/students`, {
+            const apiUrl = userType.hasOwnProperty('teachers')
+                ? process.env.REACT_APP_API_URL_TEACHERS
+                : process.env.REACT_APP_API_URL_STUDENTS;
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -99,27 +104,27 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.info('Success:', data);
+                    console.info('%cSuccess:', 'color: green', data.data.teacher);
                     setIsRendering(prevState => !prevState)
 
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    console.error('%cError:', 'color:red', error);
                 });
             Swal.fire({
                 title: 'Registration successful',
                 text: `Data has been sent to our database`,
                 icon: 'success',
                 confirmButtonText: 'Ok',
-                confirmButtonColor: '#211f2c',
+                confirmButtonColor: '#211f2c'
             });
 
 
         } catch (error) {
             if (error instanceof yup.ValidationError) {
-                console.error('Validation error:', error.message);
+                console.error('%cValidation error:', 'color:red', error.message);
             } else {
-                console.error('Error:', error);
+                console.error('%cError:', 'color:red', error);
             }
         }
     }
@@ -127,7 +132,7 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
-            if (width <= 1668) {
+            if (width <= 1792) {
                 setScreenSize('medium');
                 setIsButtonAppended(true);
             } else {
@@ -143,59 +148,63 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
     }, []);
 
     return (
-        <div className='form-overlay'>
-            <div className='form-popup rounded-4 px-5 py-3'>
-                <div className='form-popup__header'>
-                    <span className={screenSize === 'medium' ? 'd-none' : 'ps-4'}>Digital Archive</span>
+        <div className='form-overlay position-fixed top-0 start-0 w-100 h-100 z-1 d-flex align-items-center justify-content-center'>
+            <div className='form-popup w-50 rounded-4 px-5 py-3'>
+                <div className='form-popup__header position-relative'>
+                    <span className={screenSize === 'medium' ? 'd-none' : 'position-relative d-inline-block ps-4'}>Digital Archive</span>
 
-                    <button className={screenSize === 'medium' ? 'form-popup__header--close-button fs-5 pt-4' : 'form-popup__header--close-button fs-4'} onClick={() => setIsFormOpen(false)}>X</button>
+                    <button className={screenSize === 'medium' ? 'form-popup__header--close-button position-absolute end-0 top-50 translate-middle-y border border-0 bg-transparent text-white fs-5 pt-4' : 'form-popup__header--close-button position-absolute end-0 top-50 translate-middle-y border border-0 bg-transparent text-white fs-4'} onClick={() => setIsFormOpen(false)}>X</button>
 
                 </div>
-                <div className={screenSize === 'medium' ? 'form-popup__body justify-content-center' : 'form-popup__body'}>
-                    <div className="form-popup__body--name">
-                        <span className={screenSize === 'medium' ? 'w-auto text-center mb-2' : 'd-block mb-2'}>STUDENTS</span>
-                        <span className='d-block fs-5'>Add New Student</span>
-                        <button className={screenSize === 'medium' ? 'd-none' : 'form-popup__body--add-button mt-4 px-4 py-1 rounded-pill'} type='submit' form='addFormPopup'>Add</button>
+                <div className={screenSize === 'medium' ? 'form-popup__body h-100 d-flex flow-row flex-wrap justify-content-center' : 'form-popup__body h-100 d-flex flex-row flex-wrap'}>
+                    <div className="form-popup__body--name d-flex flex-column justify-content-center">
+                        <span className={screenSize === 'medium' ? 'w-auto text-center mb-2' : 'd-block mb-2'}>{userType.hasOwnProperty('students') ? 'STUDENTS' : 'TEACHERS'}</span>
+                        <span className='position-relative d-block fs-5'>Add New {userType.hasOwnProperty('students') ? 'Student' : 'Teacher'}</span>
+                        <button className={screenSize === 'medium' ? 'd-none' : 'form-popup__body--add-button bg-transparent text-white mt-4 px-4 py-1 rounded-pill'} type='submit' form='addFormPopup'>Add</button>
                     </div>
-                    <form className='form-popup__body--form' id='addFormPopup' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='form-popup__body--form d-flex flex-column justify-content-center align-items-center' id='addFormPopup' onSubmit={handleSubmit(onSubmit)}>
                         <div className={screenSize === 'medium' ? 'text-center w-100 mb-4' : 'w-100 text-center mb-4'}>
 
-                            <label className={screenSize === 'medium' ? 'label mb-4' : 'label me-2'}>
+                            <label className={screenSize === 'medium' ? 'label position-relative d-inline-block mb-4' : 'label position-relative d-inline-block me-2'}>
                                 <input
                                     {...register('name')}
                                     placeholder=" "
+                                    className='bg-transparent text-white'
                                 />
-                                <span>NAME</span>
-                                <p className={errors.name ? 'error-message p-1' : 'd-none'}>{errors.name?.message}</p>
+                                <span className='position-absolute top-0 start-0 opacity-50'>NAME</span>
+                                <p className={errors.name ? 'error-message position-absolute top-100 start-50 translate-middle-x mt-2 p-1 rounded-3 z-1' : 'd-none'}>{errors.name?.message}</p>
                             </label>
-                            <label className={screenSize === 'medium' ? 'label' : 'label ms-2'}>
+                            <label className={screenSize === 'medium' ? 'label position-relative d-inline-block' : 'label position-relative d-inline-block ms-2'}>
                                 <input
                                     {...register('surname')}
-                                    placeholder=" " />
-                                <span>SURNAME</span>
-                                <p className={errors.surname ? 'error-message p-1' : 'd-none'}>  {errors.surname?.message}</p>
+                                    placeholder=" "
+                                    className='bg-transparent text-white' />
+                                <span className='position-absolute top-0 start-0 opacity-50'>SURNAME</span>
+                                <p className={errors.surname ? 'error-message position-absolute top-100 start-50 translate-middle-x mt-2 p-1 rounded-3 z-1' : 'd-none'}>  {errors.surname?.message}</p>
                             </label>
                         </div>
 
-                        <label className='label mb-4'>
+                        <label className='label position-relative d-inline-block mb-4'>
                             <input {...register('birthdate')}
-                                placeholder=" " />
-                            <span>BIRTHDATE</span>
-                            <p className={errors.birthdate ? 'error-message p-1' : 'd-none'}>  {errors.birthdate?.message}</p>
+                                placeholder=" "
+                                className='bg-transparent text-white' />
+                            <span className='position-absolute top-0 start-0 opacity-50'>BIRTHDATE</span>
+                            <p className={errors.birthdate ? 'error-message position-absolute top-100 start-50 translate-middle-x mt-2 p-1 rounded-3 z-1' : 'd-none'}>  {errors.birthdate?.message}</p>
                         </label>
 
-                        <label className='label'>
+                        <label className='label position-relative d-inline-block'>
                             <input {...register('town')}
-                                placeholder=" " />
-                            <span>TOWN</span>
-                            <p className={errors.town ? 'error-message p-1' : 'd-none'}>  {errors.town?.message}</p>
+                                placeholder=" "
+                                className='bg-transparent text-white' />
+                            <span className='position-absolute top-0 start-0 opacity-50'>TOWN</span>
+                            <p className={errors.town ? 'error-message position-absolute top-100 start-50 translate-middle-x mt-2 p-1 rounded-3 z-1' : 'd-none'}>  {errors.town?.message}</p>
                         </label>
 
                         {userType.hasOwnProperty('students') ? (
                             <>
-                                <label className={screenSize === 'medium' ? 'select-input mt-4 mb-4' : 'select-input mt-5 mb-4'}>
+                                <label className={screenSize === 'medium' ? 'select-input position-relative d-block mt-4 mb-4' : 'select-input position-relative d-block mt-5 mb-4'}>
                                     <select {...register('program')}
-                                        className="select-input__select" required>
+                                        className="select-input__select bg-transparent text-white" required>
                                         <option value="" disabled selected hidden></option>
                                         <option value="JavaScript">JavaScript</option>
                                         <option value="Java">Java</option>
@@ -203,27 +212,25 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
                                         <option value="Python">Python</option>
                                         <option value="Tester">Tester</option>
                                     </select>
-                                    <span className='select-input__label'>PROGRAM</span>
-                                    <p className={errors.program ? 'error-message p-1' : 'd-none'}>  {errors.program?.message}</p>
+                                    <span className='select-input__label position-absolute start-0 end-0 opacity-50'>PROGRAM</span>
                                 </label>
-                                <label className='select-input'>
+                                <label className='select-input position-relative'>
                                     <select {...register('group')}
-                                        className="select-input__select" required>
+                                        className="select-input__select bg-transparent text-white" required>
                                         <option value="" disabled selected hidden></option>
                                         <option value="1">Group 1</option>
                                         <option value="2">Group 2</option>
                                         <option value="3">Group 3</option>
                                     </select>
-                                    <span className='select-input__label'>GROUP</span>
-                                    <p className={errors.group ? 'error-message p-1' : 'd-none'}>  {errors.group?.message}</p>
+                                    <span className='select-input__label position-absolute start-0 end-0 opacity-50'>GROUP</span>
                                 </label>
                             </>
                         ) :
                             userType.hasOwnProperty('teachers') ? (
                                 <>
-                                    <label className='select-input'>
+                                    <label className={screenSize === 'medium' ? 'select-input position-relative d-block mt-4 mb-4' : 'select-input position-relative d-block mt-5 mb-4'}>
                                         <select {...register('subject')}
-                                            className="select-input__select" required>
+                                            className="select-input__select bg-transparent text-white" required>
                                             <option value="" disabled selected hidden></option>
                                             <option value="JavaScript">JavaScript</option>
                                             <option value="Java">Java</option>
@@ -231,22 +238,22 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
                                             <option value="Python">Python</option>
                                             <option value="Tester">Tester</option>
                                         </select>
-                                        <span className='select-input__label'>SUBJECT</span>
+                                        <span className='select-input__label position-absolute start-0 end-0 opacity-50'>SUBJECT</span>
                                     </label>
-                                    <label className='select-input'>
+                                    <label className='select-input position-relative'>
                                         <select {...register('subjectGroup')}
-                                            className="select-input__select" required>
+                                            className="select-input__select bg-transparent text-white" required>
                                             <option value="" disabled selected hidden></option>
                                             <option value="1">Group 1</option>
                                             <option value="2">Group 2</option>
                                             <option value="3">Group 3</option>
                                         </select>
-                                        <span className='select-input__label'>SUBJECT GROUP</span>
+                                        <span className='select-input__label position-absolute start-0 end-0 opacity-50'>SUBJECT GROUP</span>
                                     </label>
                                 </>
                             ) :
                                 null}
-                        {isButtonAppended && <button className='form-popup__body--add-button mt-4 px-4 py-1 rounded-pill' type='submit' form='addFormPopup'>Add</button>}
+                        {isButtonAppended && <button className='form-popup__body--add-button bg-transparent text-white mt-4 px-4 py-1 rounded-pill' type='submit' form='addFormPopup'>Add</button>}
                     </form >
                 </div>
             </div>

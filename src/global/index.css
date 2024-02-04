@@ -7,11 +7,20 @@
   --font-family-Patrick: Patrick Hand;
   --font-family-Kalam: Kalam;
 
+  --height: 100%;
+  --width: 100%;
+
+  --default-width-em: 1em;
+  --default-height-em: 1em;
+
+  --default-letter-spacing: 1px;
+  --default-font-size: 1rem;
+
   /* v2 */
   --primary-color: #211f2c;
   --secondary-color: #3C3B4B;
   --accent-color: #FFF;
-  --active-action-color: #DE3434;
+  --active-action-color: #F36C6C;
 
   --language-colors-JavaScript-primary: #FFFED6;
   --language-colors-JavaScript-secondary: #F1C810;
@@ -27,6 +36,10 @@
 
   --language-colors-Tester-primary: #E0A7A7;
   --language-colors-Tester-secondary: #B04949;
+
+  --add-form-primary-color: #6467B6;
+
+  --scrollbar-color: #DE3434;
 
   /* v1 */
   --bg-color: #2f48588e;
@@ -45,11 +58,15 @@
   font-weight: 700;
 }
 
+
+
+body.swal2-height-auto {
+  height: 100% !important;
+}
+
 body {
   margin: 0;
   padding: 0;
-
-  height: 100vh;
 
   background-image: url(../../public/assets/app/background.jpeg);
   background-repeat: no-repeat;
@@ -65,18 +82,12 @@ body::before {
   top: 0;
   left: 0;
 
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
+  min-height: var(--height);
 
   z-index: -1;
   opacity: .6;
 
   background-image: linear-gradient(to right bottom, #000, #1c0d0d, #2c150f, #3a1f0c, #422c059b, #523f059b, #5f54019b, #686b009b, #868d0086, #a3b20086, #c2d8004f, #ddff004f);
-}
-
-#root {
-  height: 100vh;
 }
 
 .container-fluid * {
@@ -93,9 +104,49 @@ body::before {
 }
 
 .mid-block {
-  flex: 5;
+  flex: 6;
 
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
+}
+
+
+/* repeating global styles */
+html,
+body,
+body::before,
+#root,
+.small-screen::before,
+.checked-border:before {
+  height: var(--height);
+}
+
+body::before,
+.nav-block a::after,
+.small-screen::before {
+  width: var(--width);
+}
+
+.form-popup,
+.select-input__select option:checked:hover,
+.table-nav-block .page-links,
+.add-control,
+.popup,
+input[type="checkbox"]:checked::before,
+.filter-control:hover svg,
+.filter-control:hover .filter-input:valid svg {
+  background-color: var(--primary-color);
+}
+
+.form-popup__body--form .label input,
+.select-input__select,
+.loader-wrapper .loader-text {
+  font-family: var(--font-family-Dekko);
+}
+
+.select-input__select,
+.edit-rows select,
+input[type="checkbox"] {
+  cursor: pointer;
 }
