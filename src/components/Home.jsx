@@ -6,20 +6,7 @@ import {
 import './Home.css';
 import Header from './v2/Shared/Header/Header';
 
-function Home({ version, onToggle }) {
-
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
-
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsSmallScreen(window.innerWidth < 768);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+function Home({ version, onToggle, isSmallScreen }) {
 
     return (
         <div className="row w-100 h-100 d-flex flex-column">
@@ -36,8 +23,8 @@ function Home({ version, onToggle }) {
 
             }
 
-            <div className={`col-12 d-flex justify-content-center align-items-${isSmallScreen ? 'center' : 'center'} mid-block`}>
-                <h1 className="text-white fw-bold mid-title">Digital Archive</h1>
+            <div className='col-12 d-flex justify-content-center align-items-center mid-block'>
+                <h1 className="text-white text-center fw-bold mid-title">Digital Archive</h1>
             </div>
 
             {!isSmallScreen && (

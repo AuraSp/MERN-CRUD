@@ -9,35 +9,11 @@ import './Header.css';
 const archive = `${process.env.PUBLIC_URL}/assets/app/archive.png`;
 
 
-function Header({ version }) {
+function Header({ version, screenSize }) {
 
-    const [screenSize, setScreenSize] = useState('');
     const [isNavOpen, setIsNavOpen] = useState(false);
     const { pathname } = useLocation();
     console.log(pathname)
-    useEffect(() => {
-        const handleResize = () => {
-            const width = window.innerWidth;
-            if (width < 768) {
-                setScreenSize('small');
-            } else if (width >= 768 && width <= 1200) {
-                setScreenSize('medium');
-            } else {
-                setScreenSize('large');
-            }
-        };
-
-        // Initial call to set the initial screen size
-        handleResize();
-
-        // Attach the resize event listener
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
 
     const showNavbar = () => {
@@ -54,7 +30,7 @@ function Header({ version }) {
         <>
             {screenSize === 'small' && (
                 <div className='col-12 top-block'>
-                    <div className={`d-flex ${pathname === `${version}/students` || pathname === `${version}/teachers` ? 'justify-content-between' : 'justify-content-end'} py-5 px-5 position-relative z-1 small-screen`}>
+                    <div className={`d-flex ${pathname === `${version}/students` || pathname === `${version}/teachers` ? 'justify-content-between' : 'justify-content-end'} py-4 px-5 position-relative z-1 small-screen`}>
 
                         {pathname === `${version}/students` || pathname === `${version}/teachers` ? (
                             <h5 className='text-white'>Digital Archive</h5>

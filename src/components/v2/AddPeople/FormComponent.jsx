@@ -112,6 +112,7 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
                     console.error('%cError:', 'color:red', error);
                 });
             Swal.fire({
+                heightAuto: false,
                 title: 'Registration successful',
                 text: `Data has been sent to our database`,
                 icon: 'success',
@@ -151,7 +152,7 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
         <div className='form-overlay position-fixed top-0 start-0 w-100 h-100 z-1 d-flex align-items-center justify-content-center'>
             <div className='form-popup w-50 rounded-4 px-5 py-3'>
                 <div className='form-popup__header position-relative'>
-                    <span className={screenSize === 'medium' ? 'd-none' : 'position-relative d-inline-block ps-4'}>Digital Archive</span>
+                    <span className={screenSize === 'medium' ? 'd-none' : 'position-relative d-inline-block ps-4 text-white'}>Digital Archive</span>
 
                     <button className={screenSize === 'medium' ? 'form-popup__header--close-button position-absolute end-0 top-50 translate-middle-y border border-0 bg-transparent text-white fs-5 pt-4' : 'form-popup__header--close-button position-absolute end-0 top-50 translate-middle-y border border-0 bg-transparent text-white fs-4'} onClick={() => setIsFormOpen(false)}>X</button>
 
@@ -159,11 +160,11 @@ function FormComponent({ userType, setIsFormOpen, setIsRendering }) {
                 <div className={screenSize === 'medium' ? 'form-popup__body h-100 d-flex flow-row flex-wrap justify-content-center' : 'form-popup__body h-100 d-flex flex-row flex-wrap'}>
                     <div className="form-popup__body--name d-flex flex-column justify-content-center">
                         <span className={screenSize === 'medium' ? 'w-auto text-center mb-2' : 'd-block mb-2'}>{userType.hasOwnProperty('students') ? 'STUDENTS' : 'TEACHERS'}</span>
-                        <span className='position-relative d-block fs-5'>Add New {userType.hasOwnProperty('students') ? 'Student' : 'Teacher'}</span>
+                        <span className='position-relative d-block fs-5 text-white'>Add New {userType.hasOwnProperty('students') ? 'Student' : 'Teacher'}</span>
                         <button className={screenSize === 'medium' ? 'd-none' : 'form-popup__body--add-button bg-transparent text-white mt-4 px-4 py-1 rounded-pill'} type='submit' form='addFormPopup'>Add</button>
                     </div>
                     <form className='form-popup__body--form d-flex flex-column justify-content-center align-items-center' id='addFormPopup' onSubmit={handleSubmit(onSubmit)}>
-                        <div className={screenSize === 'medium' ? 'text-center w-100 mb-4' : 'w-100 text-center mb-4'}>
+                        <div className={screenSize === 'medium' ? 'text-center w-100 mb-4 mt-4' : 'w-100 text-center mb-4'}>
 
                             <label className={screenSize === 'medium' ? 'label position-relative d-inline-block mb-4' : 'label position-relative d-inline-block me-2'}>
                                 <input

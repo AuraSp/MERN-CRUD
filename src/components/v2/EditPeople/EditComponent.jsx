@@ -48,7 +48,7 @@ function EditComponent({ data, onCancelEdit, onSubmitEdit, userType }) {
                     type="text"
                     value={combinedValues}
                     onChange={(e) => setCombinedValues(e.target.value)}
-                    className='border-0 text-center rounded-2 w-50 lh-base align-middle fw-medium'
+                    className='border-0 text-center rounded-2 w-auto lh-base align-middle fw-medium'
                 />
             </td>
             <td>
@@ -56,7 +56,7 @@ function EditComponent({ data, onCancelEdit, onSubmitEdit, userType }) {
                     type='text'
                     value={birthdate.slice(0, 10)}
                     onChange={(e) => setBirthdate(e.target.value)}
-                    className='border-0 text-center rounded-2 w-50 lh-base align-middle fw-medium'
+                    className='border-0 text-center rounded-2 w-75 lh-base align-middle fw-medium'
                 />
             </td>
             <td>
@@ -64,7 +64,7 @@ function EditComponent({ data, onCancelEdit, onSubmitEdit, userType }) {
                     type='text'
                     value={town}
                     onChange={(e) => setTown(e.target.value)}
-                    className='border-0 text-center rounded-2 w-50 lh-base align-middle fw-medium'
+                    className='border-0 text-center rounded-2 w-75 lh-base align-middle fw-medium'
                 />
             </td>
 
@@ -89,7 +89,7 @@ function EditComponent({ data, onCancelEdit, onSubmitEdit, userType }) {
 
                             value={group}
                             onChange={(e) => setGroup(e.target.value)}
-                            className='border-0 text-center rounded-2 w-50 bg-white align-middle fw-medium'
+                            className='border-0 text-center rounded-2 w-75 bg-white align-middle fw-medium'
                         >
                             <option value="1">Group 1</option>
                             <option value="2">Group 2</option>
@@ -118,7 +118,7 @@ function EditComponent({ data, onCancelEdit, onSubmitEdit, userType }) {
 
                             value={subjectGroup}
                             onChange={(e) => setSubjectGroup(e.target.value)}
-                            className='border-0 text-center rounded-2 w-50 bg-white align-middle fw-medium'
+                            className='border-0 text-center rounded-2 w-75 bg-white align-middle fw-medium'
                         >
                             <option value="1">Group 1</option>
                             <option value="2">Group 2</option>

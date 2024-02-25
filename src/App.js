@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -25,14 +25,53 @@ function App() {
     navigate(newRoutePath + '/students');
   };
 
+  // const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsSmallScreen(window.innerWidth < 768);
+  //   };
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
+
+  const [screenSize, setScreenSize] = useState('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setScreenSize('small');
+      } else if (width >= 768 && width <= 1200) {
+        setScreenSize('medium');
+      } else {
+        setScreenSize('large');
+      }
+    };
+
+    // Initial call to set the initial screen size
+    handleResize();
+
+    // Attach the resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className='container-fluid h-100 p-0 m-0'>
       <Routes>
-        <Route path="/" element={<Home version={routePath} onToggle={handleToggle} />} />
-        <Route path="/:id/students" element={routePath === '/v1' ? <ViewStudentV1 onToggle={handleToggle} version={routePath} /> : <ViewStudentV2 onToggle={handleToggle} version={routePath} />} />
-        <Route path="/:id/teachers" element={routePath === '/v1' ? <ViewTeacherV1 onToggle={handleToggle} version={routePath} /> : <ViewTeacherV2 onToggle={handleToggle} version={routePath} />} />
-        <Route path="/:id/addstudent" element={<AddStudentV1 version={routePath} onToggle={handleToggle}/>} />
-        <Route path="/:id/addteacher" element={<AddTeacherV1 version={routePath} onToggle={handleToggle}/>} />
+        <Route path="/" element={<Home version={routePath} onToggle={handleToggle} screenSize={screenSize} />} />
+        <Route path="/:id/students" element={routePath === '/v1' ? <ViewStudentV1 version={routePath} /> : <ViewStudentV2 version={routePath} screenSize={screenSize} />} />
+        <Route path="/:id/teachers" element={routePath === '/v1' ? <ViewTeacherV1 version={routePath} /> : <ViewTeacherV2 version={routePath} screenSize={screenSize} />} />
+        <Route path="/:id/addstudent" element={<AddStudentV1 version={routePath} onToggle={handleToggle} />} />
+        <Route path="/:id/addteacher" element={<AddTeacherV1 version={routePath} onToggle={handleToggle} />} />
       </Routes>
     </div>
   )

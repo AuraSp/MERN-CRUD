@@ -3,7 +3,7 @@
 .table-wrapper,
 .left-section .checked-count span,
 .right-section .action-button:last-of-type,
-.loader-wrapper .circle {
+.loader-content .circle {
   background-color: var(--secondary-color);
 }
 
@@ -140,12 +140,12 @@
 
 
 /* Loading API section */
-.loader-wrapper {
+.loader-content {
   width: calc(var(--default-width-em) + 8em);
   height: calc(var(--default-height-em) + 4em);
 }
 
-.loader-wrapper .circle {
+.loader-content .circle {
   width: var(--default-width-em);
   height: calc(var(--default-height-em) - 0.05em);
   left: 15%;
@@ -173,12 +173,12 @@
   }
 }
 
-.loader-wrapper .circle:nth-child(2) {
+.loader-content .circle:nth-child(2) {
   left: 45%;
   animation-delay: .2s;
 }
 
-.loader-wrapper .circle:nth-child(3) {
+.loader-content .circle:nth-child(3) {
   left: auto;
   right: 15%;
   animation-delay: .3s;
