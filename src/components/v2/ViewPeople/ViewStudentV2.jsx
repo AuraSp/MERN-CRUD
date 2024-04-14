@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from "react-router-dom";
-import { BiFilter, BiTrash, BiEditAlt } from "react-icons/bi";
+import Swal from 'sweetalert2';
 import StudentCard from './StudentCard';
-import './ViewInfo.css';
-import '../Shared/@Media/@Media.css';
 import Header from '../Shared/Header/Header';
 import FormComponent from '../AddPeople/FormComponent';
 import EditComponent from '../EditPeople/EditComponent';
-import Swal from 'sweetalert2';
+
+import { BiFilter, BiTrash, BiEditAlt } from "react-icons/bi";
+import './ViewInfo.css';
+import '../Shared/@Media/@Media.css';
 
 const home = `${process.env.PUBLIC_URL}/assets/app/home.png`;
 const arrow = `${process.env.PUBLIC_URL}/assets/app/arrow.png`;
+
 
 function ViewStudentV2({ version, screenSize }) {
     const [loading, setLoading] = useState(false);
@@ -34,26 +36,27 @@ function ViewStudentV2({ version, screenSize }) {
     const tbodyRef = useRef(null);
     const tableRef = useRef(null);
 
-    const getUsers = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(process.env.REACT_APP_API_URL_STUDENTS);
-            if (!response.ok) {
-                throw new Error('%cFailed to fetch data', 'color:red');
-            }
-            const users = await response.json();
-            setUsers(users.data.students);
-            setUserType(users.data);
-        } catch (error) {
-            console.error('%cError fetching data:', 'color:red', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-
     useEffect(() => {
+
+        const getUsers = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(process.env.REACT_APP_API_URL_STUDENTS);
+                if (!response.ok) {
+                    throw new Error('%cFailed to fetch data', 'color:red');
+                }
+                const users = await response.json();
+                setUsers(users.data.students);
+                setUserType(users.data);
+            } catch (error) {
+                console.error('%cError fetching data:', 'color:red', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         getUsers();
+
     }, [isRendering]);
 
     const handleCheckboxChange = (userId) => {
@@ -186,8 +189,17 @@ function ViewStudentV2({ version, screenSize }) {
 
     };
 
-    const onSubmitEdit = (e, userId, data) => {
-        fetch(process.env.REACT_APP_API_URL_STUDENTS + userId, {
+    const onSubmitEdit = (userId, data) => {
+
+        if (data.birthdate instanceof Date) {
+            // Adjust the date by adding one day
+            data.birthdate.setDate(data.birthdate.getDate() + 1);
+            data.birthdate = data.birthdate.toISOString().slice(0, 10); // Convert to YYYY-MM-DD format
+        }
+
+        console.log(data)
+
+        fetch(`${process.env.REACT_APP_API_URL_STUDENTS}${userId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
@@ -218,7 +230,9 @@ function ViewStudentV2({ version, screenSize }) {
 
     const onCancelEdit = (userId) => {
         setSelectedUserIds((prevState) => ({
-            checked: prevState.checked,
+            checked: ['small', 'medium'].includes(screenSize)
+                ? prevState.checked.filter((id) => id !== userId)
+                : prevState.checked,
             editing: prevState.editing.filter((id) => id !== userId)
         }));
     };
@@ -227,7 +241,7 @@ function ViewStudentV2({ version, screenSize }) {
         <div className='row w-100 h-100 d-flex flex-column'>
             <Header version={version} screenSize={screenSize} />
             <div className='mid-block'>
-                <nav className={`table-nav-block d-${screenSize === 'small' || screenSize === 'medium' ? 'none' : 'flex'}`}>
+                <nav className={`table-nav-block d-${['small', 'medium'].includes(screenSize) ? 'none' : 'flex'}`}>
                     <NavLink to="/" className={`page-links py-1 px-5 text-white text-center d-flex align-items-center ${pathname === '/' ? 'active' : ''}`}>
                         <img src={home} alt="Home" className='me-3' />
                         Home
@@ -235,8 +249,8 @@ function ViewStudentV2({ version, screenSize }) {
                     <NavLink to={`${version}/students`} className={`page-links py-1 px-5 text-white text-center ${pathname === '/students' ? 'active' : ''}`}>Students Archive</NavLink>
                     <NavLink to={`${version}/teachers`} className={`page-links py-1 px-5 text-white text-center position-relative ${pathname === '/teachers' ? 'active' : ''}`}>Teachers Archive</NavLink>
                 </nav>
-                <div className={`table-wrapper w-100 py-4 px-3 flex-grow-1 flex-shrink-1 overflow-hidden rounded-${screenSize === 'small' || screenSize === 'medium' ? '5' : ''}`}>
-                    <section className={`d-${screenSize === 'small' || screenSize === 'medium' ? 'none' : 'flex'} align-items-center justify-content-between table-controls text-white mb-2 mx-4`}
+                <div className={`table-wrapper w-100 py-4 px-3 flex-grow-1 flex-shrink-1 overflow-hidden rounded-${['small', 'medium'].includes(screenSize) ? '5' : ''}`}>
+                    <section className={`d-${['small', 'medium'].includes(screenSize) ? 'none' : 'flex'} align-items-center justify-content-between table-controls text-white mb-2 mx-4`}
                         ref={sectionRef}>
                         <div className='filter-control border border-2 rounded-pill py-1 px-3 position-relative text-center'>
                             <BiFilter className='fs-4 position-absolute top-50 rounded-circle' />
@@ -251,8 +265,8 @@ function ViewStudentV2({ version, screenSize }) {
                     {isFormOpen &&
                         <FormComponent userType={userType} setIsFormOpen={setIsFormOpen} setIsRendering={setIsRendering} />}
 
-                    <table className={`w-100 d-block rounded-5 ${screenSize === 'small' || screenSize === 'medium' ? 'overflow-auto h-100' : 'overflow-hidden'}`} ref={tableRef} style={{ height: tableHeight }}>
-                        <thead className={`bg-light text-dark w-100 overflow-x-hidden d-${screenSize === 'small' || screenSize === 'medium' ? 'none' : 'block'}`}>
+                    <table className={`w-100 d-block rounded-5 ${['small', 'medium'].includes(screenSize) ? 'overflow-auto h-100' : 'overflow-hidden'}`} ref={tableRef} style={{ height: tableHeight }}>
+                        <thead className={`bg-light text-dark w-100 overflow-x-hidden d-${['small', 'medium'].includes(screenSize) ? 'none' : 'block'}`}>
                             <tr className='d-block w-100 text-center position-relative py-3'>
                                 <th>
                                     <input type='checkbox'
@@ -267,7 +281,7 @@ function ViewStudentV2({ version, screenSize }) {
                                 <th>Group</th>
                             </tr>
                         </thead>
-                        <tbody ref={tbodyRef} style={{ height: tbodyHeight }} className={`w-100 overflow-y-auto d-block position-relative ${screenSize === 'small' || screenSize === 'medium' ? 'px-2' : 'bg-white'}`}>
+                        <tbody ref={tbodyRef} style={{ height: tbodyHeight }} className={`w-100 overflow-y-auto d-block position-relative ${['small', 'medium'].includes(screenSize) ? 'px-2' : 'bg-white'}`}>
                             {!loading ? (
                                 search(users).length > 0 ? (
                                     search(users).map((user) => (
@@ -278,6 +292,8 @@ function ViewStudentV2({ version, screenSize }) {
                                                 onSubmitEdit={onSubmitEdit}
                                                 onCancelEdit={() => onCancelEdit(user._id)}
                                                 userType={userType}
+                                                screenSize={screenSize}
+                                                checked={selectedUserIds.checked.includes(user._id)}
                                             />
                                         ) : (
                                             <StudentCard
@@ -286,6 +302,8 @@ function ViewStudentV2({ version, screenSize }) {
                                                 checked={selectedUserIds.checked.includes(user._id)}
                                                 onCheckboxChange={() => handleCheckboxChange(user._id)}
                                                 screenSize={screenSize}
+                                                onDelete={onDelete}
+                                                onEdit={onEdit}
                                             />
 
                                         )
@@ -293,7 +311,7 @@ function ViewStudentV2({ version, screenSize }) {
                                 ) : (
                                     <tr className='empty-data__wrapper d-block w-100 text-center py-3 position-relative'>
                                         <td className='empty-data__text w-100 pt-5'>
-                                            {screenSize === 'small' || screenSize === 'medium' ?
+                                            {['small', 'medium'].includes(screenSize) ?
                                                 <><span className='d-block lh-lg'>No users found. Add a new user by pressing '+ New Student' button</span>
                                                     <button className='add-control border border-2 rounded-pill text-white py-1 px-4 mt-2' onClick={() => setIsFormOpen(true)}>+ New Student</button></> :
                                                 <>
@@ -306,7 +324,7 @@ function ViewStudentV2({ version, screenSize }) {
                                 )
                             ) : (
                                 <tr className='loader-wrapper d-block w-100 text-center py-3 position-relative'>
-                                    <td colSpan={3}>
+                                    <td colSpan={3} className='w-auto'>
                                         <div className='loader-content d-flex flex-column align-items-center justify-content-center position-relative'>
                                             <div className='circle position-absolute rounded-circle'></div>
                                             <div className="circle position-absolute rounded-circle"></div>

@@ -160,23 +160,3 @@ input:-webkit-autofill:active {
     caret-color: var(--accent-color);
     -webkit-caret-color: var(--accent-color);
 }
-
-
-
-/* Errors */
-.error-message {
-    border: 1px solid var(--active-action-color);
-    color: var(--active-action-color);
-    white-space: nowrap;
-}
-
-.error-message::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent transparent var(--active-action-color) transparent;
-    transform: translateX(-50%);
-}

@@ -35,7 +35,7 @@ input[type="checkbox"]::before {
 
 
 input[type="checkbox"]:checked::before {
-    background-image: url('../../../../public/assets/app/check.png');
+    background-image: url('/public/assets/app/check.png');
     background-size: cover;
     color: var(--accent-color);
 }

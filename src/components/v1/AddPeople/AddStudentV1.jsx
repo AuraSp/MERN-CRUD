@@ -65,7 +65,7 @@ function AddStudentV1({ onToggle, version }) {
     });
 
     const onSubmit = () => {
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/students`, {
+        fetch(process.env.REACT_APP_API_URL_TSTUDENTS, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

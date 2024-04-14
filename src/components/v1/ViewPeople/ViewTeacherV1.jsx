@@ -21,8 +21,7 @@ function ViewTeacherV1({ onToggle, version }) {
 
     const getUsers = async () => {
         setLoading(true);
-        const response = await fetch('  https://api-for-mern-app.onrender.com/api/v2/teachers');
-        // const response = await fetch(`${process.env.REACT_APP_API_PROXY_URI}/teachers`);
+        const response = await fetch(process.env.REACT_APP_API_URL_TEACHERS);
         const users = await response.json();
         console.info(users);
         setUsers(users.data.teachers);
@@ -61,7 +60,7 @@ function ViewTeacherV1({ onToggle, version }) {
 
                     const dlt = users.filter((data) => data._id !== id);
                     setUsers(dlt);
-                    fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/${id}`, { method: 'DELETE' })
+                    fetch(`${process.env.REACT_APP_API_URL_TEACHERS}${id}`, { method: 'DELETE' })
                         .then(() => console.info(`${id} was deleted succesfully`));
 
                 } else if (result.isDenied) {
@@ -79,7 +78,7 @@ function ViewTeacherV1({ onToggle, version }) {
     //---HandleTeacherEdit---//
     const submitEdit = (e, data) => {
         e.preventDefault();
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers/` + editId, {
+        fetch(`${process.env.REACT_APP_API_URL_TEACHERS}${editId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,7 +119,7 @@ function ViewTeacherV1({ onToggle, version }) {
             </div>
             <div className='updating rounded fw-bold mt-5 bg-primary p-1 d-flex flex-row justify-content-center'>
                 <HiOutlineSpeakerphone className='text-black mx-3 p-0 fs-3' />
-                <span className='text-black'>This is the old version. Redirect to newiest one from home page!</span>
+                <span className='text-black'>This is the old version. Redirect to the newiest one from home page!</span>
             </div>
             <table className='table'>
                 <thead className='thead-dark text-center'>

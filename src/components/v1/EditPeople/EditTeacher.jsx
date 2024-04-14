@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { MdCancel, MdCheckCircle } from "react-icons/md";
 
+import { MdCancel, MdCheckCircle } from "react-icons/md";
 import './EditInfo.css';
 
 function EditTeacher({ data, onCancel, onSubmit }) {
+
   const [name, setName] = useState(data.name);
   const [surname, setSurname] = useState(data.surname);
   const [birthdate, setBirthdate] = useState(data.birthdate);

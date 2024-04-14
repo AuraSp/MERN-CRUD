@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import './AddForm.css';
 
 function AddTeacherV1({onToggle, version}) {
-    console.log(version)
+    
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [birthdate, setBirthdate] = useState('');
@@ -65,7 +65,7 @@ function AddTeacherV1({onToggle, version}) {
     });
 
     const onSubmit = () => {
-        fetch(`https://api-for-mern-app.onrender.com/api/v2/teachers`, {
+        fetch(process.env.REACT_APP_API_URL_TEACHERS, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

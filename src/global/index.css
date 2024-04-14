@@ -68,11 +68,11 @@ body {
   margin: 0;
   padding: 0;
 
-  background-image: url(../../public/assets/app/background.jpeg);
-  background-repeat: no-repeat;
+  background-image: url('/public/assets/app/background.jpg');
   background-position: center;
   background-size: cover;
-
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 body::before {
@@ -85,9 +85,8 @@ body::before {
   min-height: var(--height);
 
   z-index: -1;
-  opacity: .6;
 
-  background-image: linear-gradient(to right bottom, #000, #1c0d0d, #2c150f, #3a1f0c, #422c059b, #523f059b, #5f54019b, #686b009b, #868d0086, #a3b20086, #c2d8004f, #ddff004f);
+  background: rgba(0, 0, 0, .2);
 }
 
 .container-fluid * {
@@ -133,6 +132,7 @@ body::before,
 .table-nav-block .page-links,
 .add-control,
 .popup,
+.error,
 input[type="checkbox"]:checked::before,
 .filter-control:hover svg,
 .filter-control:hover .filter-input:valid svg {
@@ -149,4 +149,32 @@ input[type="checkbox"]:checked::before,
 .edit-rows select,
 input[type="checkbox"] {
   cursor: pointer;
+}
+
+/* Errors */
+.error {
+  border: 1px solid var(--active-action-color);
+  color: var(--active-action-color);
+  position: absolute;
+}
+
+.error::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--active-action-color) transparent;
+  transform: translateX(-50%);
+}
+
+.error__add {
+  white-space: nowrap;
+}
+
+.error__edit {
+  white-space: wrap;
+  font-size: calc(var(--default-font-size) - 0.2rem);
+  color: rgb(209, 232, 246);
 }

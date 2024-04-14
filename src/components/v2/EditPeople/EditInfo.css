@@ -1,6 +1,6 @@
 /* repeating components' styles */
-.edit-rows input,
-.edit-rows select {
+.edit-rows__large input,
+.edit-rows__large select {
     outline: 1px solid var(--primary-color);
 }
 
