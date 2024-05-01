@@ -48,6 +48,7 @@ function ViewStudentV2({ version, screenSize }) {
                 const users = await response.json();
                 setUsers(users.data.students);
                 setUserType(users.data);
+                console.log(response)
             } catch (error) {
                 console.error('%cError fetching data:', 'color:red', error);
             } finally {
@@ -323,7 +324,7 @@ function ViewStudentV2({ version, screenSize }) {
                                     </tr>
                                 )
                             ) : (
-                                <tr className='loader-wrapper d-block w-100 text-center py-3 position-relative'>
+                                <tr className='loader-wrapper d-block w-100 text-center py-3 position-relative' data-testid='loading-dots'>
                                     <td colSpan={3} className='w-auto'>
                                         <div className='loader-content d-flex flex-column align-items-center justify-content-center position-relative'>
                                             <div className='circle position-absolute rounded-circle'></div>
