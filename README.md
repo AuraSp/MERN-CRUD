@@ -7,16 +7,17 @@
 ***
 
 ### About this application
-The application uses CRUD operations to View, Create, Edit and Delete fictional data about students and teachers.\
-Client can request data from MongoDB database using custom build API gateway.\
-More information about this API can be read here --> <a href='https://github.com/AuraSp/API-MERN-crud'>API-MERN-crud</a>.
+This application utilizes CRUD operations to manage fictional data about students and teachers. It offers a seamless experience for viewing, creating, editing, and deleting data.\
+The application interacts with a MongoDB database through a custom-built API gateway. For more details about this API, check out our <a href='https://github.com/AuraSp/API-MERN-crud'>API-MERN-crud repository</a>.
 
 ### Features
 - Search Bar
 - IA focused navigation
-- Website Hosting
+- Responsive Design
+- Batch Operations
+- Data Validation
 
 <img src='https://imgur.com/eFGwbxG.png' type="image/png" width='500' height='auto' />
-
+<i>Caption: Example screenshot of the application interface.</i>
 You can read more in <a href='https://github.com/AuraSp/MERN-crud/wiki/1.Home'>Wiki</a>
 
